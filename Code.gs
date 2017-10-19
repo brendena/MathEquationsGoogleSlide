@@ -32,7 +32,7 @@ function onInstall(){
 
 function doGet() {
   return HtmlService
-      .createTemplateFromFile('Page')
+      .createTemplateFromFile('index')
       .evaluate();
 }
 
