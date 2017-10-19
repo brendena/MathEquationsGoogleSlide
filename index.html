@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <style>
+            /* used to hide the mathjax logo
+                Its always hidden but has a length longer
+                then the container.  So i have to display
+                none everthing.
+            */
+            #MathJax_SVG_Hidden{
+                display:none;
+            }
+            #MathJax_SVG_Hidden + svg{
+                display:none;
+            }
+        </style>
+    </head>
+    <body>
+    <div id="main"></div>
+    <div id="math">
+
+    </div>
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js" async>
+    </script>
+    <script type="text/x-mathjax-config">
+        // needs to be in heer or else it doesn't work 
+        //common configs
+        //http://docs.mathjax.org/en/latest/config-files.html
+        MathJax.Hub.Config({
+            jax: ["input/TeX","input/MathML","input/AsciiMath","output/SVG"],
+            extensions: ["tex2jax.js","mml2jax.js","MathEvents.js","asciimath2jax.js","MathZoom.js","AssistiveMML.js"],
+            MathML: {
+                extensions: ["content-mathml.js"]
+            },
+            TeX: {
+                Macros: {
+                    RR: '{\\bf R}',
+                    bold: ['{\\bf #1}', 1]
+                }
+            },
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                processEscapes: true
+            },
+            AsciiMath: {
+                fixphi: true,
+                useMathMLspacing: true,
+                displaystyle: false,
+                decimalsign: "."
+            },
+            SVG: {
+                //font: "STIX-Web",
+                mtextFontInherit: true,
+                blacker: 1,
+                linebreaks: { automatic: true },
+                useFontCache: false
+            },
+            menuSettings: {
+                zoom: "Click"
+            },
+            MatchWebFonts: {
+                matchFor: {
+                    //https://github.com/electron/electron/issues/6564
+                    // use fontcache off
+                    SVG: {useFontCache: false}
+                },
+                fontCheckDelay: 500,
+                fontCheckTimeout: 15 * 1000
+                },
+                messageStyle: "none"
+            }
+        );
+    </script>
+    <script src="./SelectInput.js"></script> 
+
+    <script >
+        var node = document.getElementById('main');
+        console.log(Elm)
+        var app = Elm.Main.embed(node);
+        // receive something from Elm
+        app.ports.toJs.subscribe(function (str) {
+            console.log("got from Elm:", str);
+            var mathDiv = document.getElementById("math");
+            mathDiv.innerHTML = str;
+            var math = MathJax.Hub.getAllJax("MathDivElm")[0];
+            MathJax.Hub.Queue(["Text",math,str]);
+
+        });
+        app.ports.toElm.send("testing");
+        //app.ports.toElm.send("undefined is not a function");
+    </script>
+     
+    </body>
+</html>
