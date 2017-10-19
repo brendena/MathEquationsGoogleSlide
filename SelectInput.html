@@ -1,4 +1,4 @@
-<script>
+
 (function() {
 'use strict';
 
@@ -8341,7 +8341,7 @@ var _user$project$Main$infoHeader = A2(
 			{ctor: '[]'},
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html$text('Math Convert'),
+				_0: _elm_lang$html$Html$text('Math Equations'),
 				_1: {ctor: '[]'}
 			}),
 		_1: {ctor: '[]'}
@@ -8375,6 +8375,11 @@ var _user$project$Main$toOptionString = function (currency) {
 };
 var _user$project$Main$toJs = _elm_lang$core$Native_Platform.outgoingPort(
 	'toJs',
+	function (v) {
+		return v;
+	});
+var _user$project$Main$sumitEquation = _elm_lang$core$Native_Platform.outgoingPort(
+	'sumitEquation',
 	function (v) {
 		return v;
 	});
@@ -8437,6 +8442,12 @@ var _user$project$Main$update = F2(
 					_0: model,
 					_1: _user$project$Main$toJs(_p2._0)
 				};
+			case 'SumitEquation':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: _user$project$Main$sumitEquation(_p2._0)
+				};
 			default:
 				return {
 					ctor: '_Tuple2',
@@ -8447,6 +8458,9 @@ var _user$project$Main$update = F2(
 				};
 		}
 	});
+var _user$project$Main$SumitEquation = function (a) {
+	return {ctor: 'SumitEquation', _0: a};
+};
 var _user$project$Main$UpdateStr = function (a) {
 	return {ctor: 'UpdateStr', _0: a};
 };
@@ -8509,42 +8523,58 @@ var _user$project$Main$view = function (model) {
 							{
 								ctor: '::',
 								_0: _elm_lang$html$Html_Events$onClick(
-									_user$project$Main$SendToJs('testing')),
+									_user$project$Main$SumitEquation('Submit')),
 								_1: {ctor: '[]'}
 							},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text('send Info'),
+								_0: _elm_lang$html$Html$text('submit'),
 								_1: {ctor: '[]'}
 							}),
 						_1: {
 							ctor: '::',
 							_0: A2(
-								_elm_lang$html$Html$p,
+								_elm_lang$html$Html$button,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$id('MathTextElm'),
+									_0: _elm_lang$html$Html_Events$onClick(
+										_user$project$Main$SendToJs('testing')),
 									_1: {ctor: '[]'}
 								},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text('The answer you provided is: ${}$.'),
+									_0: _elm_lang$html$Html$text('send Info'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
 								ctor: '::',
 								_0: A2(
 									_elm_lang$html$Html$p,
-									{ctor: '[]'},
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html$text(model.message),
+										_0: _elm_lang$html$Html_Attributes$id('MathTextElm'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('The answer you provided is: ${}$.'),
 										_1: {ctor: '[]'}
 									}),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Main$infoFooter,
-									_1: {ctor: '[]'}
+									_0: A2(
+										_elm_lang$html$Html$p,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(model.message),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Main$infoFooter,
+										_1: {ctor: '[]'}
+									}
 								}
 							}
 						}
@@ -8591,4 +8621,4 @@ for (var publicModule in Elm)
 }
 
 }).call(this);
-</script>
+
