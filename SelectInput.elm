@@ -15,8 +15,9 @@ Ports
 https://hackernoon.com/how-elm-ports-work-with-a-picture-just-one-25144ba43cdd
 https://guide.elm-lang.org/interop/javascript.html
 -}
-port toJs : String -> Cmd msg
-port sumitEquation: String -> Cmd msg
+port reloadEquaion : String -> Cmd msg
+port updateEquaion : String -> Cmd msg
+port sumitEquation : String -> Cmd msg
 port toElm : (String -> msg) -> Sub msg
 
 main =
@@ -29,7 +30,7 @@ main =
 
 init : (Model, Cmd Msg)
 init  =
-  ( Model MathML "", Cmd.none
+  ( Model MathML "df", Cmd.none
   )
 
 
@@ -39,7 +40,7 @@ init  =
 
 type alias Model =
   { mathType: MathType,
-    message: String
+    linkedMathEquation: String
   }
 
 type  MathType =
@@ -82,9 +83,11 @@ viewOption mathType =
 {--------------Update----------------------------------------}
 type Msg
   = MathTypeChange String
-  | SendToJs String
+  | ReloadEquaion 
+  | SumitEquation
   | UpdateStr String
-  | SumitEquation String
+  | SetLinkedMathEquation String
+  | UpdateEquaion String
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
@@ -93,13 +96,20 @@ update msg model =
     MathTypeChange newMathType ->
       ({ model | mathType =  fromOptionString newMathType }, Cmd.none)
     
-    SendToJs str ->
-        ( model, toJs str)
+    ReloadEquaion ->
+        ( model, reloadEquaion "reload")
 
-    SumitEquation str ->
-        ( model, sumitEquation str)
-    UpdateStr str ->
-            ( { model | message = str }, Cmd.none )
+    SumitEquation ->
+        ( model, sumitEquation model.linkedMathEquation)
+    
+    UpdateEquaion str-> 
+        ( model, updateEquaion str)
+
+    UpdateStr  str ->
+        (model, Cmd.none)
+
+    SetLinkedMathEquation str ->
+        ({ model | linkedMathEquation =  str}, Cmd.none)
 
 -- VIEW
 {--------------HTML----------------------------------------}
@@ -109,24 +119,30 @@ view model =
     [ 
      infoHeader,
      select
-        [ onInput MathTypeChange
+        [ onInput MathTypeChange, id "selectMathType"
         ]
         [ viewOption MathML
         , viewOption Latex
         , viewOption Tex
         ],
-     textarea [ placeholder "get changed", onInput SendToJs ] [],
-     button [onClick (SumitEquation "Submit")] [text "submit"] , 
-     button [ onClick (SendToJs "testing")] [text "send Info"],
+     textarea [id "textAreaMathEquation", placeholder "get changed", onInput UpdateEquaion ] [],
+     button [id "submitMathEquation", onClick SumitEquation] [text "submit"] , 
+     --button [ onClick (SendToJs "testing")] [text "send Info"],
+     div [ id "reloadContainer"] [
+        button [onClick ReloadEquaion ] [text "reload"],
+        button [onClick (SetLinkedMathEquation ""), hidden (String.isEmpty model.linkedMathEquation)] [text "unconnect"]
+     ],
      p [id "MathTextElm"] [text "The answer you provided is: ${}$."],
-     p [] [text model.message],
      infoFooter
     ]
+
+
 
 infoHeader : Html msg
 infoHeader = 
     header []
-           [h1 [] [text "Math Equations"] ]
+           [h1 [] [text "Math"],
+            h1 [] [text "Equations"] ]
 
 infoFooter : Html msg
 infoFooter =

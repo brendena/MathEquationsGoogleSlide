@@ -12,6 +12,36 @@
             #MathJax_SVG_Hidden + svg{
                 display:none;
             }
+            body{
+              margin: 0;
+            }
+            h1 {
+                margin: 0;
+            }
+            header{
+                border-bottom: solid;
+                padding-bottom: .5em;
+                margin-bottom: 1em;
+            }
+            #selectMathType{
+                width: 100%;
+                margin-bottom: 6px;
+                background: #50c6ff;
+                color: white;
+            }
+            #textAreaMathEquation{
+                height: 100px;
+                width: 100%;
+            }
+            #submitMathEquation{
+                width:100%;
+            }
+            #reloadContainer{
+                display:flex
+            }
+            #reloadContainer > button {
+                flex:1;
+            }
         </style>
     </head>
     <body>
@@ -19,7 +49,7 @@
     <canvas id="myCanvas" width="800px" style="display:none">
     
     <?!= include('SelectInput'); ?>
-    
+
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js" async>
     </script>

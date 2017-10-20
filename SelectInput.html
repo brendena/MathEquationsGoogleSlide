@@ -8341,10 +8341,21 @@ var _user$project$Main$infoHeader = A2(
 			{ctor: '[]'},
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html$text('Math Equations'),
+				_0: _elm_lang$html$Html$text('Math'),
 				_1: {ctor: '[]'}
 			}),
-		_1: {ctor: '[]'}
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h1,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Equations'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		}
 	});
 var _user$project$Main$viewOption = function (mathType) {
 	return A2(
@@ -8373,8 +8384,13 @@ var _user$project$Main$toOptionString = function (currency) {
 			return 'Tex';
 	}
 };
-var _user$project$Main$toJs = _elm_lang$core$Native_Platform.outgoingPort(
-	'toJs',
+var _user$project$Main$reloadEquaion = _elm_lang$core$Native_Platform.outgoingPort(
+	'reloadEquaion',
+	function (v) {
+		return v;
+	});
+var _user$project$Main$updateEquaion = _elm_lang$core$Native_Platform.outgoingPort(
+	'updateEquaion',
 	function (v) {
 		return v;
 	});
@@ -8386,14 +8402,14 @@ var _user$project$Main$sumitEquation = _elm_lang$core$Native_Platform.outgoingPo
 var _user$project$Main$toElm = _elm_lang$core$Native_Platform.incomingPort('toElm', _elm_lang$core$Json_Decode$string);
 var _user$project$Main$Model = F2(
 	function (a, b) {
-		return {mathType: a, message: b};
+		return {mathType: a, linkedMathEquation: b};
 	});
 var _user$project$Main$Tex = {ctor: 'Tex'};
 var _user$project$Main$Latex = {ctor: 'Latex'};
 var _user$project$Main$MathML = {ctor: 'MathML'};
 var _user$project$Main$init = {
 	ctor: '_Tuple2',
-	_0: A2(_user$project$Main$Model, _user$project$Main$MathML, ''),
+	_0: A2(_user$project$Main$Model, _user$project$Main$MathML, 'df'),
 	_1: _elm_lang$core$Platform_Cmd$none
 };
 var _user$project$Main$valuesWithLabels = {
@@ -8436,30 +8452,41 @@ var _user$project$Main$update = F2(
 						}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
-			case 'SendToJs':
+			case 'ReloadEquaion':
 				return {
 					ctor: '_Tuple2',
 					_0: model,
-					_1: _user$project$Main$toJs(_p2._0)
+					_1: _user$project$Main$reloadEquaion('reload')
 				};
 			case 'SumitEquation':
 				return {
 					ctor: '_Tuple2',
 					_0: model,
-					_1: _user$project$Main$sumitEquation(_p2._0)
+					_1: _user$project$Main$sumitEquation(model.linkedMathEquation)
 				};
+			case 'UpdateEquaion':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: _user$project$Main$updateEquaion(_p2._0)
+				};
+			case 'UpdateStr':
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			default:
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{message: _p2._0}),
+						{linkedMathEquation: _p2._0}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 		}
 	});
-var _user$project$Main$SumitEquation = function (a) {
-	return {ctor: 'SumitEquation', _0: a};
+var _user$project$Main$UpdateEquaion = function (a) {
+	return {ctor: 'UpdateEquaion', _0: a};
+};
+var _user$project$Main$SetLinkedMathEquation = function (a) {
+	return {ctor: 'SetLinkedMathEquation', _0: a};
 };
 var _user$project$Main$UpdateStr = function (a) {
 	return {ctor: 'UpdateStr', _0: a};
@@ -8467,9 +8494,8 @@ var _user$project$Main$UpdateStr = function (a) {
 var _user$project$Main$subscriptions = function (model) {
 	return _user$project$Main$toElm(_user$project$Main$UpdateStr);
 };
-var _user$project$Main$SendToJs = function (a) {
-	return {ctor: 'SendToJs', _0: a};
-};
+var _user$project$Main$SumitEquation = {ctor: 'SumitEquation'};
+var _user$project$Main$ReloadEquaion = {ctor: 'ReloadEquaion'};
 var _user$project$Main$MathTypeChange = function (a) {
 	return {ctor: 'MathTypeChange', _0: a};
 };
@@ -8487,7 +8513,11 @@ var _user$project$Main$view = function (model) {
 					{
 						ctor: '::',
 						_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$MathTypeChange),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$id('selectMathType'),
+							_1: {ctor: '[]'}
+						}
 					},
 					{
 						ctor: '::',
@@ -8508,11 +8538,15 @@ var _user$project$Main$view = function (model) {
 						_elm_lang$html$Html$textarea,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$placeholder('get changed'),
+							_0: _elm_lang$html$Html_Attributes$id('textAreaMathEquation'),
 							_1: {
 								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$SendToJs),
-								_1: {ctor: '[]'}
+								_0: _elm_lang$html$Html_Attributes$placeholder('get changed'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$UpdateEquaion),
+									_1: {ctor: '[]'}
+								}
 							}
 						},
 						{ctor: '[]'}),
@@ -8522,9 +8556,12 @@ var _user$project$Main$view = function (model) {
 							_elm_lang$html$Html$button,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(
-									_user$project$Main$SumitEquation('Submit')),
-								_1: {ctor: '[]'}
+								_0: _elm_lang$html$Html_Attributes$id('submitMathEquation'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$SumitEquation),
+									_1: {ctor: '[]'}
+								}
 							},
 							{
 								ctor: '::',
@@ -8534,17 +8571,48 @@ var _user$project$Main$view = function (model) {
 						_1: {
 							ctor: '::',
 							_0: A2(
-								_elm_lang$html$Html$button,
+								_elm_lang$html$Html$div,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(
-										_user$project$Main$SendToJs('testing')),
+									_0: _elm_lang$html$Html_Attributes$id('reloadContainer'),
 									_1: {ctor: '[]'}
 								},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text('send Info'),
-									_1: {ctor: '[]'}
+									_0: A2(
+										_elm_lang$html$Html$button,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$ReloadEquaion),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('reload'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$button,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onClick(
+													_user$project$Main$SetLinkedMathEquation('')),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$hidden(
+														_elm_lang$core$String$isEmpty(model.linkedMathEquation)),
+													_1: {ctor: '[]'}
+												}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('unconnect'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
 								}),
 							_1: {
 								ctor: '::',
@@ -8562,19 +8630,8 @@ var _user$project$Main$view = function (model) {
 									}),
 								_1: {
 									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$p,
-										{ctor: '[]'},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text(model.message),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: _user$project$Main$infoFooter,
-										_1: {ctor: '[]'}
-									}
+									_0: _user$project$Main$infoFooter,
+									_1: {ctor: '[]'}
 								}
 							}
 						}
