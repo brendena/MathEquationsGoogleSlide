@@ -115,6 +115,9 @@ function getLinkedToImage(){
   var imageObjectFromImageProperties = imageProperties[image.getObjectId()]
   if(imageObjectFromImageProperties == undefined)
     throw "not a equation"
-  return image.getObjectId()
+  return {
+      "objectId": image.getObjectId(),
+      "equation": imageObjectFromImageProperties["equation"]
+  }
     
 }

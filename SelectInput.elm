@@ -116,8 +116,8 @@ update msg model =
     -- event to send string
     -- update
     UpdateEquaion str-> 
-        ({ model | mathEquation =  str }, updateEquaion  str)
-    
+        ({ model |  mathEquation = str }, updateEquaion  str)
+    --mathEquation =  str,
 
     SetLinkedMathEquation str ->
         ({ model | linkedMathEquation =  str}, Cmd.none)
@@ -138,7 +138,7 @@ view model =
         , viewOption Latex
         , viewOption Tex
         ],
-     textarea [id "textAreaMathEquation", placeholder "get changed", onInput UpdateEquaion ] [text model.mathEquation],
+     textarea [id "textAreaMathEquation", placeholder "get changed", onInput UpdateEquaion, value model.mathEquation] [ ],
      div [] [
         button [id "submitMathEquation", onClick SumitEquation] [text "submit"] , 
         --button [ onClick (SendToJs "testing")] [text "send Info"],
