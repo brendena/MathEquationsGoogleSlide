@@ -72,7 +72,7 @@
     <div id="main"></div>
     <canvas id="myCanvas" width="800px" style="display:none">
     
-        <script src="SelectInput.js"></script>
+       <?!= include('SelectInput'); ?>
      <!--
          <?!= include('SelectInput'); ?>
      <script src="SelectInput.js"></script>
@@ -141,9 +141,10 @@
             
             var equationJson = JSON.parse(equationObject)
             console.log(equationJson)
-            var math = MathJax.Hub.getAllJax(equationJson["mathType"] + "Equation")[0];
+            var divIdEquation = equationJson["mathType"] + "Equation";
+            var math = MathJax.Hub.getAllJax(divIdEquation)[0];
             if("MathML" == equationJson["mathType"]){
-                document.getElementById("MathMLEquation").innerHTML = equationJson["mathEquation"];
+                document.getElementById(divIdEquation).innerHTML = equationJson["mathEquation"];
                 MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
             }
             else{
