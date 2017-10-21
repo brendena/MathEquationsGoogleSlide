@@ -1,7 +1,6 @@
-![Master Google sheets documents icon](https://github.com/brendena/MathEquationsGoogleSlide/blob/master/image/logo96by96.png?raw=true)
+![Master Google sheets documents icon](https://github.com/brendena/MathEquationsGoogleSlide/blob/master/image/96x96.png?raw=true)
 
 # MathEquationsGoogleSlide
-https://github.com/brendena/MathEquationsGoogleSlide/blob/master/image/logo128by128.png?raw=true
 
 
 
