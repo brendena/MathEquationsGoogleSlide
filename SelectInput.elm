@@ -24,7 +24,8 @@ Second change extension to html
 port reloadEquaion : String -> Cmd msg
 port updateEquaion : String -> Cmd msg
 port sumitEquation : String -> Cmd msg
-port toElm : (String -> msg) -> Sub msg
+port updatingLinkedMathEquation : (String -> msg) -> Sub msg
+port updatingMathEquation : (String -> msg) -> Sub msg
 
 main =
   Html.program
@@ -92,7 +93,6 @@ type Msg
   = MathTypeChange String
   | ReloadEquaion 
   | SumitEquation
-  | UpdateStr String
   | SetLinkedMathEquation String
   | UpdateEquaion String
 
@@ -118,8 +118,6 @@ update msg model =
     UpdateEquaion str-> 
         ({ model | mathEquation =  str }, updateEquaion  str)
     
-    UpdateStr  str ->
-        (model , Cmd.none)
 
     SetLinkedMathEquation str ->
         ({ model | linkedMathEquation =  str}, Cmd.none)
@@ -140,7 +138,7 @@ view model =
         , viewOption Latex
         , viewOption Tex
         ],
-     textarea [id "textAreaMathEquation", placeholder "get changed", onInput UpdateEquaion ] [],
+     textarea [id "textAreaMathEquation", placeholder "get changed", onInput UpdateEquaion ] [text model.mathEquation],
      div [] [
         button [id "submitMathEquation", onClick SumitEquation] [text "submit"] , 
         --button [ onClick (SendToJs "testing")] [text "send Info"],
@@ -149,6 +147,7 @@ view model =
             button [onClick (SetLinkedMathEquation ""), hidden (String.isEmpty model.linkedMathEquation)] [text "unconnect"]
         ]
      ],
+     p[][text model.linkedMathEquation],
      p [id "MathTextElm"] [text "The answer you provided is: ${}$."],
      infoFooter
     ]
@@ -179,6 +178,10 @@ infoFooter =
 {--------------SubScriptions----------------------------------------}
 subscriptions : Model -> Sub Msg
 subscriptions model =
-  toElm UpdateStr
+  Sub.batch[
+    updatingLinkedMathEquation SetLinkedMathEquation
+    ,updatingMathEquation UpdateEquaion
+  ]
+  
 
 {-----------end-SubScriptions----------------------------------------}

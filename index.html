@@ -72,8 +72,8 @@
     <div id="main"></div>
     <canvas id="myCanvas" width="800px" style="display:none">
     
-    <?!= include('SelectInput'); ?>
 
+    <script src="SelectInput.js"></script>
     <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js" async>
     </script>
@@ -126,7 +126,6 @@
             }
         );
     </script>
-    <script src="./SelectInput.js"></script> 
 
     <script >
         var divSvmEquation = "MathTextElm";
@@ -136,30 +135,40 @@
         app.ports.updateEquaion.subscribe(function (str) {
             console.log("got from Elm:", str);
             var math = MathJax.Hub.getAllJax(divSvmEquation)[0];
-            MathJax.Hub.Queue(["Text",math,str]);
+            //MathJax.Hub.Queue(["Text",math,str]);
         });
         app.ports.sumitEquation.subscribe(function(str){
             console.log("submitting equations " + str)
-            console.log(JSON.parse(str))
-            //getImage()
-        });
-
-
-        //app.ports.toElm.send("testing");
-        var getImage  = function(){
+            jsonElmRequest = JSON.parse(str)
             var divSvg = document.getElementById(divSvmEquation);
-            console.log(divSvg)
             if(divSvg != null){
                 var svg = divSvg.getElementsByTagName("svg")[0];
                 var canvas = document.getElementById("myCanvas");
                 drawInlineSVG(svg, function(){
                     var image = canvas.toDataURL("image/png");
                     //console.log(image)
-                google.script.run.withSuccessHandler(function(){console.log("success") }).withFailureHandler(function(error){console.log("error"); console.log(error)}).setImage(image.split("base64,")[1]);
+                jsonElmRequest["image"] = image.split("base64,")[1]
+                google.script.run.withSuccessHandler(success).withFailureHandler(error).setImage(jsonElmRequest);
                 });    
             }
+        });
+        app.ports.reloadEquaion.subscribe(function(str){
+           google.script.run.withSuccessHandler(function(results){
+               console.log(results);
+               app.ports.updatingLinkedMathEquation.send("testing")
+               app.ports.updatingMathEquation.send("whatShit")
+               
+           }).withFailureHandler(error).getLinkedToImage();
+           console.log("testing");
+        });
+        
+        var success = function (){
+          console.log("success")
         }
-  
+        var error = function(error){
+          console.log(error)
+        }
+        
         /*
             accept a svg and will perfect construct a canvas to match
             the dimension of the svg
