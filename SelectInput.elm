@@ -14,6 +14,12 @@ Example latex
 Ports
 https://hackernoon.com/how-elm-ports-work-with-a-picture-just-one-25144ba43cdd
 https://guide.elm-lang.org/interop/javascript.html
+
+First convert elm to js
+- elm-make SelectInput.elm --output=SelectInput.js
+
+Second change extension to html
+
 -}
 port reloadEquaion : String -> Cmd msg
 port updateEquaion : String -> Cmd msg
@@ -96,15 +102,19 @@ update msg model =
     MathTypeChange newMathType ->
       ({ model | mathType =  fromOptionString newMathType }, Cmd.none)
     
+    -- event to reload the id
     ReloadEquaion ->
         ( model, reloadEquaion "reload")
 
+    -- event to submit equaion
     SumitEquation ->
         ( model, sumitEquation model.linkedMathEquation)
     
+    -- event to send string
+    -- update
     UpdateEquaion str-> 
         ( model, updateEquaion str)
-
+    
     UpdateStr  str ->
         (model, Cmd.none)
 
