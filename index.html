@@ -6,6 +6,9 @@
                 then the container.  So i have to display
                 none everthing.
             */
+            body{
+                width:300px;
+            }
             #MathJax_SVG_Hidden{
                 display:none;
             }
@@ -23,16 +26,20 @@
                 padding-bottom: .5em;
                 margin-bottom: 1em;
             }
+            header > h1{
+              padding-left: 10%;
+            }
             #selectMathType{
-                width: 100%;
-                margin-bottom: 6px;
-                background: #50c6ff;
-                color: white;
+              width: 100%;
+              margin-bottom: 6px;
+              background: #ffdddd;
+              color: black;
+              font-size: 1em;
             }
             #textAreaMathEquation{
                 height: 100px;
-                max-width: 89%;
-                min-width: 89%;
+                max-width: 85%;
+                min-width: 85%;
                 margin: 4%;
             }
             #submitMathEquation{
@@ -43,6 +50,21 @@
             }
             #reloadContainer > button {
                 flex:1;
+            }
+            button{
+               padding: 10px;
+              margin: 5px;
+              background: #ff385e;
+              color: white;
+              border: 0px;
+              border-bottom: 0px solid rgb(255, 255, 255);
+              font-size: 1em;
+              transition: 1s;
+            }
+            button:hover{
+              background:black;
+              border-bottom: 10px solid #ffd91e;;
+              padding-bottom: 0px;
             }
         </style>
     </head>

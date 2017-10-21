@@ -136,11 +136,13 @@ view model =
         , viewOption Tex
         ],
      textarea [id "textAreaMathEquation", placeholder "get changed", onInput UpdateEquaion ] [],
-     button [id "submitMathEquation", onClick SumitEquation] [text "submit"] , 
-     --button [ onClick (SendToJs "testing")] [text "send Info"],
-     div [ id "reloadContainer"] [
-        button [onClick ReloadEquaion ] [text "reload"],
-        button [onClick (SetLinkedMathEquation ""), hidden (String.isEmpty model.linkedMathEquation)] [text "unconnect"]
+     div [] [
+        button [id "submitMathEquation", onClick SumitEquation] [text "submit"] , 
+        --button [ onClick (SendToJs "testing")] [text "send Info"],
+        div [ id "reloadContainer"] [
+            button [onClick ReloadEquaion ] [text "reload"],
+            button [onClick (SetLinkedMathEquation ""), hidden (String.isEmpty model.linkedMathEquation)] [text "unconnect"]
+        ]
      ],
      p [id "MathTextElm"] [text "The answer you provided is: ${}$."],
      infoFooter
