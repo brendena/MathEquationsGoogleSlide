@@ -72,8 +72,9 @@
     <div id="main"></div>
     <canvas id="myCanvas" width="800px" style="display:none">
     
-     <?!= include('SelectInput'); ?>
+        <script src="SelectInput.js"></script>
      <!--
+         <?!= include('SelectInput'); ?>
      <script src="SelectInput.js"></script>
      -->
     
@@ -131,14 +132,27 @@
     </script>
 
     <script >
-        var divSvmEquation = "MathTextElm";
+        var divSvmEquation = "SvgContainer";
         var node = document.getElementById('main');
         var app = Elm.Main.embed(node);
         // receive something from Elm
-        app.ports.updateEquaion.subscribe(function (str) {
-            console.log("got from Elm:", str);
-            var math = MathJax.Hub.getAllJax(divSvmEquation)[0];
-            MathJax.Hub.Queue(["Text",math,str]);
+        app.ports.updateEquaion.subscribe(function (equationObject) {
+            console.log(equationObject);
+            
+            var equationJson = JSON.parse(equationObject)
+            console.log(equationJson)
+            var math = MathJax.Hub.getAllJax(equationJson["mathType"] + "Equation")[0];
+            if("MathML" == equationJson["mathType"]){
+                document.getElementById("MathMLEquation").innerHTML = equationJson["mathEquation"];
+                MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
+            }
+            else{
+                MathJax.Hub.Queue(["Text",math,equationJson["mathEquation"]]);
+            }
+
+            
+            
+            //MathJax.Hub.Queue(["Text",math,str]);
         });
         app.ports.sumitEquation.subscribe(function(str){
             console.log("submitting equations " + str)

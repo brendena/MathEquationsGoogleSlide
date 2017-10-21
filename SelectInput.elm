@@ -6,6 +6,7 @@ import Html.Events exposing (onInput, on, onClick)
 import String
 import Basics exposing (..)
 import List exposing (..)
+import Json.Encode exposing (encode, Value, string, int, float, bool, list, object)
 
 {-
 Example latex 
@@ -37,7 +38,7 @@ main =
 
 init : (Model, Cmd Msg)
 init  =
-  ( Model MathML "" "", Cmd.none
+  ( Model Tex "" "", Cmd.none
   )
 
 
@@ -53,13 +54,24 @@ type alias Model =
 
 type  MathType =
          MathML
-        | Latex
+        | AsciiMath
         | Tex
+
+encodeModel : Model -> Value
+encodeModel model =
+  Json.Encode.object
+    [ ("mathType",Json.Encode.string  (toOptionString model.mathType) )
+    , ("linkedMathEquation", Json.Encode.string model.linkedMathEquation)
+    , ("mathEquation", Json.Encode.string model.mathEquation)
+    ]
+--("mathType", toOptionString model.mathType) 
+    
+    
 
 valuesWithLabels : List ( MathType, String )
 valuesWithLabels =
   [ ( MathML, "MathML" )
-  , ( Latex, "Latex" )
+  , ( AsciiMath, "AsciiMath" )
   , ( Tex, "Tex" )
   ]
 
@@ -68,14 +80,14 @@ toOptionString : MathType -> String
 toOptionString currency =
   case currency of
     MathML -> "MathML"
-    Latex -> "Latex"
+    AsciiMath -> "AsciiMath"
     Tex -> "Tex"
 
 fromOptionString : String -> MathType
 fromOptionString string =
   case string of
     "MathML" -> MathML
-    "Latex" -> Latex
+    "AsciiMath" -> AsciiMath
     "Tex" -> Tex
     _ -> Tex
 
@@ -111,12 +123,16 @@ update msg model =
     -- needs equation
     -- id of the image -- mathEquation
     SumitEquation ->
-        ( model, sumitEquation ("{\"linkedMathEquation\": \"" ++ model.linkedMathEquation ++ "\",\"mathEquation\": \"" ++ model.mathEquation ++ "\"}") )
-    
+        ( model, sumitEquation (encode 0 (encodeModel model) ) )
+     -- ("{\"linkedMathEquation\": \"" ++ model.linkedMathEquation ++ "\",\"mathEquation\": \"" ++ model.mathEquation ++ "\"}") 
     -- event to send string
     -- update
     UpdateEquaion str-> 
-        ({ model |  mathEquation = str }, updateEquaion  str)
+        let
+            newModel = { model |  mathEquation = str }
+        in
+            
+        (newModel, updateEquaion  (encode 0 (encodeModel newModel) ) )
     --mathEquation =  str,
 
     SetLinkedMathEquation str ->
@@ -134,9 +150,10 @@ view model =
      select
         [ onInput MathTypeChange, id "selectMathType"
         ]
-        [ viewOption MathML
-        , viewOption Latex
-        , viewOption Tex
+        [ viewOption Tex
+        , viewOption MathML
+        , viewOption AsciiMath
+       
         ],
      textarea [id "textAreaMathEquation", placeholder "get changed", onInput UpdateEquaion, value model.mathEquation] [ ],
      div [] [
@@ -148,7 +165,14 @@ view model =
         ]
      ],
      p[][text model.linkedMathEquation],
-     p [id "MathTextElm"] [text "The answer you provided is: ${}$."],
+     div[id "SvgContainer"][
+       p [id "AsciiMathEquation",hidden (AsciiMath /= model.mathType) ] [text "Ascii `` "], 
+       p [id "TexEquation",hidden (Tex /= model.mathType)] [text "Tex ${}$ "], 
+       p [id "MathMLEquation",hidden (MathML /= model.mathType)] [text ""] 
+     ],
+     
+     -- ``
+     -- ${}$
      infoFooter
     ]
 
