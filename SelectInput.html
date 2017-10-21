@@ -8400,16 +8400,16 @@ var _user$project$Main$sumitEquation = _elm_lang$core$Native_Platform.outgoingPo
 		return v;
 	});
 var _user$project$Main$toElm = _elm_lang$core$Native_Platform.incomingPort('toElm', _elm_lang$core$Json_Decode$string);
-var _user$project$Main$Model = F2(
-	function (a, b) {
-		return {mathType: a, linkedMathEquation: b};
+var _user$project$Main$Model = F3(
+	function (a, b, c) {
+		return {mathType: a, linkedMathEquation: b, mathEquation: c};
 	});
 var _user$project$Main$Tex = {ctor: 'Tex'};
 var _user$project$Main$Latex = {ctor: 'Latex'};
 var _user$project$Main$MathML = {ctor: 'MathML'};
 var _user$project$Main$init = {
 	ctor: '_Tuple2',
-	_0: A2(_user$project$Main$Model, _user$project$Main$MathML, 'df'),
+	_0: A3(_user$project$Main$Model, _user$project$Main$MathML, '', ''),
 	_1: _elm_lang$core$Platform_Cmd$none
 };
 var _user$project$Main$valuesWithLabels = {
@@ -8462,13 +8462,26 @@ var _user$project$Main$update = F2(
 				return {
 					ctor: '_Tuple2',
 					_0: model,
-					_1: _user$project$Main$sumitEquation(model.linkedMathEquation)
+					_1: _user$project$Main$sumitEquation(
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'{\"linkedMathEquation\": \"',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								model.linkedMathEquation,
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									'\",\"mathEquation\": \"',
+									A2(_elm_lang$core$Basics_ops['++'], model.mathEquation, '\"}')))))
 				};
 			case 'UpdateEquaion':
+				var _p3 = _p2._0;
 				return {
 					ctor: '_Tuple2',
-					_0: model,
-					_1: _user$project$Main$updateEquaion(_p2._0)
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{mathEquation: _p3}),
+					_1: _user$project$Main$updateEquaion(_p3)
 				};
 			case 'UpdateStr':
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};

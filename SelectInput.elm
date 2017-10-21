@@ -36,7 +36,7 @@ main =
 
 init : (Model, Cmd Msg)
 init  =
-  ( Model MathML "df", Cmd.none
+  ( Model MathML "" "", Cmd.none
   )
 
 
@@ -46,7 +46,8 @@ init  =
 
 type alias Model =
   { mathType: MathType,
-    linkedMathEquation: String
+    linkedMathEquation: String,
+    mathEquation: String
   }
 
 type  MathType =
@@ -107,20 +108,24 @@ update msg model =
         ( model, reloadEquaion "reload")
 
     -- event to submit equaion
+    -- needs equation
+    -- id of the image -- mathEquation
     SumitEquation ->
-        ( model, sumitEquation model.linkedMathEquation)
+        ( model, sumitEquation ("{\"linkedMathEquation\": \"" ++ model.linkedMathEquation ++ "\",\"mathEquation\": \"" ++ model.mathEquation ++ "\"}") )
     
     -- event to send string
     -- update
     UpdateEquaion str-> 
-        ( model, updateEquaion str)
+        ({ model | mathEquation =  str }, updateEquaion  str)
     
     UpdateStr  str ->
-        (model, Cmd.none)
+        (model , Cmd.none)
 
     SetLinkedMathEquation str ->
         ({ model | linkedMathEquation =  str}, Cmd.none)
+{-
 
+ -}
 -- VIEW
 {--------------HTML----------------------------------------}
 view : Model -> Html Msg

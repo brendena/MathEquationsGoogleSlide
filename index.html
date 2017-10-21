@@ -133,14 +133,15 @@
         var node = document.getElementById('main');
         var app = Elm.Main.embed(node);
         // receive something from Elm
-        app.ports.toJs.subscribe(function (str) {
+        app.ports.updateEquaion.subscribe(function (str) {
             console.log("got from Elm:", str);
             var math = MathJax.Hub.getAllJax(divSvmEquation)[0];
             MathJax.Hub.Queue(["Text",math,str]);
         });
         app.ports.sumitEquation.subscribe(function(str){
             console.log("submitting equations " + str)
-            getImage()
+            console.log(JSON.parse(str))
+            //getImage()
         });
 
 
