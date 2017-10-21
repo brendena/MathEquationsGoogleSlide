@@ -3,8 +3,14 @@ Notes
 https://developers.google.com/apps-script/guides/slides/presentations
 
 https://developers.google.com/apps-script/reference/slides/slides-app
-
 */
+
+function PropertiesTypes(){
+  return {
+     "imageProperties":{}
+   }
+}
+
 function onOpen() {
   SlidesApp.getUi().createMenu('Math Extension')
       .addItem('Menu', 'showSidebar')
@@ -41,9 +47,74 @@ function include(filename) {
       .getContent();
 }
 
-function setImage(blob){
-  //var blob = "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"
+function setImage(jsonImageData){
+  var imageSlide = undefined;
+  var imageProperties = getSpecificSavedProperties("imageProperties");
+  var image = createImageFromBlob(jsonImageData["image"]);
   var slide = SlidesApp.getActivePresentation().getSlides()[0];
-  var imageBlob = Utilities.newBlob(Utilities.base64Decode(blob), MimeType.PNG);
-  slide.insertImage(imageBlob);
+  if(jsonImageData["linkedMathEquation"] != ""){
+    Logger.log("changing Image")
+    var imageObjectId = jsonImageData["linkedMathEquation"];
+    if( imageObjectId == undefined)
+      throw "image does not exist";
+    else{
+      imageObject = imageProperties[imageObjectId]
+      if(imageObject == undefined)
+        throw "image is not part of this extension"
+        
+      imageSlide = findImageSlide(imageObjectId)
+      imageSlide.replace(image)
+    }
+  }
+  else{
+    Logger.log("New Image")
+    imageSlide = slide.insertImage(image);
+  }
+
+  
+  imageProperties[imageSlide.getObjectId()] = {
+    "equation": jsonImageData["mathEquation"]
+  }
+  
+  savePropertie("imageProperties", imageProperties)
+}
+
+function createImageFromBlob(blob){
+  return Utilities.newBlob(Utilities.base64Decode(blob), MimeType.PNG);  
+}
+
+function test(){
+  Logger.log(getSpecificSavedProperties("imageProperties"))
+}
+
+function findImageSlide(imageObjectId){
+  var slide = SlidesApp.getActivePresentation().getSlides()[0];
+  var allImage = slide.getImages();
+  var imageSlide = undefined;
+  for(var i = 0; i < allImage.length; i++){
+    if(allImage[i].getObjectId() == imageObjectId){
+      imageSlide = allImage[i]
+    }
+  }
+  if(imageSlide == undefined){
+    throw "couldn't find the id on this slide"
+  }
+  return imageSlide;
+}
+
+function getLinkedToImage(){ 
+  var imageProperties = getSpecificSavedProperties("imageProperties");
+  var selection = SlidesApp.getActivePresentation().getSelection();
+  var pageElements = selection.getPageElementRange().getPageElements();
+  if(pageElements.length <= 0)
+    throw "please select a item"
+  else if(pageElements.length > 1)
+    throw "can only select one item"
+  var image = pageElements[0].asImage()
+  Logger.log(image.getObjectId())
+  var imageObjectFromImageProperties = imageProperties[image.getObjectId()]
+  if(imageObjectFromImageProperties == undefined)
+    throw "not a equation"
+  return image.getObjectId()
+    
 }
