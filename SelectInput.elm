@@ -27,6 +27,7 @@ port updateEquaion : String -> Cmd msg
 port sumitEquation : String -> Cmd msg
 port updatingLinkedMathEquation : (String -> msg) -> Sub msg
 port updatingMathEquation : (String -> msg) -> Sub msg
+port updateErrorMessage : (String -> msg) -> Sub msg
 
 main =
   Html.program
@@ -38,7 +39,7 @@ main =
 
 init : (Model, Cmd Msg)
 init  =
-  ( Model Tex "" "", Cmd.none
+  ( Model Tex "" "" "" False, Cmd.none
   )
 
 
@@ -49,7 +50,9 @@ init  =
 type alias Model =
   { mathType: MathType,
     linkedMathEquation: String,
-    mathEquation: String
+    mathEquation: String,
+    errorMessage: String,
+    helpPageOpen: Bool
   }
 
 type  MathType =
@@ -107,13 +110,18 @@ type Msg
   | SumitEquation
   | SetLinkedMathEquation String
   | UpdateEquaion String
+  | ToggleHelpPage Bool 
+  | UpdateErrorMessage String
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     MathTypeChange newMathType ->
-      ({ model | mathType =  fromOptionString newMathType }, Cmd.none)
+        let
+            newModel = { model |  mathType = fromOptionString newMathType }
+        in
+          (newModel, updateEquaion (encode 0 (encodeModel newModel) ))
     
     -- event to reload the id
     ReloadEquaion ->
@@ -137,6 +145,12 @@ update msg model =
 
     SetLinkedMathEquation str ->
         ({ model | linkedMathEquation =  str}, Cmd.none)
+      
+    ToggleHelpPage bool ->
+      ({ model | helpPageOpen = bool}, Cmd.none)
+    
+    UpdateErrorMessage string ->
+      ({ model | errorMessage = string}, Cmd.none)
 {-
 
  -}
@@ -144,10 +158,11 @@ update msg model =
 {--------------HTML----------------------------------------}
 view : Model -> Html Msg
 view model =
-  div []
+  div [ id "elmContainer"]
     [ 
      infoHeader,
-     select
+     div [id "siteMainContent"] [
+        select
         [ onInput MathTypeChange, id "selectMathType"
         ]
         [ viewOption Tex
@@ -155,46 +170,91 @@ view model =
         , viewOption AsciiMath
        
         ],
-     textarea [id "textAreaMathEquation", placeholder "get changed", onInput UpdateEquaion, value model.mathEquation] [ ],
-     div [] [
-        button [id "submitMathEquation", onClick SumitEquation] [text "submit"] , 
-        --button [ onClick (SendToJs "testing")] [text "send Info"],
-        div [ id "reloadContainer"] [
-            button [onClick ReloadEquaion ] [text "reload"],
-            button [onClick (SetLinkedMathEquation ""), hidden (String.isEmpty model.linkedMathEquation)] [text "unconnect"]
+        textarea [id "textAreaMathEquation", placeholder "get changed", onInput UpdateEquaion, value model.mathEquation] [ ],
+        div [] [
+            button [id "submitMathEquation", onClick SumitEquation] [text "submit"] , 
+            --button [ onClick (SendToJs "testing")] [text "send Info"],
+            div [ id "reloadContainer"] [
+                button [onClick ReloadEquaion ] [text "reload"],
+                button [onClick (SetLinkedMathEquation ""), hidden (String.isEmpty model.linkedMathEquation)] [text "unconnect"]
+            ]
+        ],
+        div[id "SvgContainer"] [
+          p [id "AsciiMathEquation",hidden (AsciiMath /= model.mathType) ] [text "Ascii `` "], 
+          p [id "TexEquation",hidden (Tex /= model.mathType)] [text "Tex ${}$ "], 
+          div[hidden (MathML /= model.mathType)][
+            p [] [text "MathML"],
+            p [id "MathMLEquation"] [text ""] 
+          ]
+        ],
+        div[id "ErrorMessage", hidden(String.isEmpty model.errorMessage), onClick (UpdateErrorMessage "")] [
+          p[] [text ("Error - " ++ model.errorMessage) ]
         ]
      ],
-     p[][text model.linkedMathEquation],
-     div[id "SvgContainer"][
-       p [id "AsciiMathEquation",hidden (AsciiMath /= model.mathType) ] [text "Ascii `` "], 
-       p [id "TexEquation",hidden (Tex /= model.mathType)] [text "Tex ${}$ "], 
-       p [id "MathMLEquation",hidden (MathML /= model.mathType)] [text ""] 
-     ],
      
+     helpPage model,
      -- ``
      -- ${}$
      infoFooter
     ]
 
+myStyle : Attribute msg
+myStyle =
+  style
+    [ ("backgroundColor", "red")
+    , ("height", "90px")
+    , ("width", "100%")
+    ]
+
+helpPageStyles: Bool -> Attribute msg
+helpPageStyles bool = 
+    if(bool == True)
+    then
+      style
+      [ ("transform", "scale(1,1)")
+      ]
+    else
+      style
+      [ ("transform", "scale(1,0)")
+      ]
 
 
-infoHeader : Html msg
+
+helpPage : Model -> Html Msg
+helpPage model = 
+    div [id "helpPage", helpPageStyles model.helpPageOpen]
+           [h2 [] [text "Help Page",span [id "exitIcon", onClick (ToggleHelpPage False) ] [text " X"]],
+            
+            h3 [] [text "Create a Equation"],
+            p [] [text ("To create a image out of your equation you must first select the type of format your math equation is in.  Then type your equation inside the" ++
+                  "text box.  Right underneath the text box will be a example of the output.  Once you are done hit the submit button and it will create a image of the" ++
+                  "equation")],
+            h3 [] [text "Updating Equation"],
+            p [] [text ("To update a image select the image you want and hit the reload icon.  This will bind the image to the extension and whenever you hit the submit" ++
+                        "the submit button it will update the image.  To stop updating a image hit the unconnect button.")],
+            img [id "logo" , src "./image/logo.svg"] []
+             ]
+
+
+infoHeader : Html Msg
 infoHeader = 
     header []
-           [h1 [] [text "Math"],
-            h1 [] [text "Equations"] ]
+           [h1 [] [text "<Math>"],
+            h1 [] [text "</Equations>"],
+            img [id "helpIcon", onClick (ToggleHelpPage True) , src "./helpLogo.svg"] [],
+            img [id "logo" , src "./image/logo.svg"] []
+             ]
 
-infoFooter : Html msg
+infoFooter : Html Msg
 infoFooter =
     footer [ class "info" ]
-        [ p [] [ text " Stuff " ]
-        , p []
-            [ text "Written by "
-            , a [ href "https://github.com/evancz" ] [ text "Evan Czaplicki" ]
+        [ p []
+            [ text "Code at "
+            , a [ href "https://github.com/brendena/MathEquationsGoogleSlide" ] [ text "Github Repo / For Bug Reports" ]
             ]
         , p []
-            [ text "Part of "
-            , a [ href "http://todomvc.com" ] [ text "TodoMVC" ]
+            [ a [ href "mailto:bafeaturerequest@gmail.com?Subject=Bug%20or%20Feature" ] [ text "Message me" ]
+            , text " at bafeaturerequest@gmail.com"
             ]
         ]
 {--------------HTML----------------------------------------}

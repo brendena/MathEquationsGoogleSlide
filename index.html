@@ -13,8 +13,12 @@
             #MathJax_SVG_Hidden + svg{
                 display:none;
             }
-            body{
+            body {
               margin: 0;
+              min-height: 100%;
+            }
+            html {
+                height:100%;
             }
             h1 {
                 margin: 0;
@@ -66,16 +70,55 @@
               border-bottom: 10px solid #BBEFC1;;
               padding-bottom: 0px;
             }
+            #logo{
+                position: fixed;
+                right: 25px;
+                top: 10px;
+                height: 60px;
+                transform: rotate(355deg);
+            }
+            #helpPage{
+                position: fixed;
+                width: 96vw;
+                height: 96vh;
+                z-index: 2;
+                background: #FFDE9E;
+                top: 0;
+                transform: scale(1,0);
+                transition: 1s;
+                border: 2vw solid black;
+            }
+            #siteMainContent{
+                flex: 1;
+            }
+            #main {
+                height:100%;
+            }
+            #elmContainer{
+                display: flex;
+                min-height: 100vh;
+                flex-direction: column;
+            }
+
+            #exitIcon{
+                margin-left:30px;
+            }
+            #helpIcon{
+                height: 30px;
+                position: absolute;
+                top: 40px;
+                right: 30%;
+            }
         </style>
     </head>
     <body>
     <div id="main"></div>
     <canvas id="myCanvas" width="800px" style="display:none">
     
-       <?!= include('SelectInput'); ?>
+        <script src="SelectInput.js"></script>
      <!--
          <?!= include('SelectInput'); ?>
-     <script src="SelectInput.js"></script>
+     
      -->
     
     <script type="text/javascript" async
