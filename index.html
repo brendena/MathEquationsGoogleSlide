@@ -6,9 +6,7 @@
                 then the container.  So i have to display
                 none everthing.
             */
-            body{
-                width:300px;
-            }
+            
             #MathJax_SVG_Hidden{
                 display:none;
             }
@@ -32,7 +30,7 @@
             #selectMathType{
               width: 100%;
               margin-bottom: 6px;
-              background: #ffdddd;
+              background: #FFFF9E;
               color: black;
               font-size: 1em;
             }
@@ -46,24 +44,26 @@
                 width:100%;
             }
             #reloadContainer{
-                display:flex
+                padding-top: 5px;
+                display:flex;
+                width:100%;
             }
             #reloadContainer > button {
                 flex:1;
             }
             button{
-               padding: 10px;
-              margin: 5px;
-              background: #ff385e;
-              color: white;
+              padding: 10px;
+              background: #FFFF9E;
+              color: black;
               border: 0px;
               border-bottom: 0px solid rgb(255, 255, 255);
               font-size: 1em;
               transition: 1s;
+              border: solid black 1px;
             }
             button:hover{
-              background:black;
-              border-bottom: 10px solid #ffd91e;;
+              background:#FFDE9E;
+              border-bottom: 10px solid #BBEFC1;;
               padding-bottom: 0px;
             }
         </style>
@@ -158,7 +158,7 @@
         app.ports.sumitEquation.subscribe(function(str){
             console.log("submitting equations " + str)
             jsonElmRequest = JSON.parse(str)
-            var divSvg = document.getElementById(divSvmEquation);
+            var divSvg = document.getElementById(jsonElmRequest["mathType"] + "Equation");
             if(divSvg != null){
                 var svg = divSvg.getElementsByTagName("svg")[0];
                 var canvas = document.getElementById("myCanvas");

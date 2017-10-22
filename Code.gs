@@ -51,7 +51,8 @@ function setImage(jsonImageData){
   var imageSlide = undefined;
   var imageProperties = getSpecificSavedProperties("imageProperties");
   var image = createImageFromBlob(jsonImageData["image"]);
-  var slide = SlidesApp.getActivePresentation().getSlides()[0];
+  var slide = SlidesApp.getActivePresentation().getSelection().getCurrentPage();
+  Logger.log(slide)
   if(jsonImageData["linkedMathEquation"] != ""){
     Logger.log("changing Image")
     var imageObjectId = jsonImageData["linkedMathEquation"];
@@ -88,7 +89,7 @@ function test(){
 }
 
 function findImageSlide(imageObjectId){
-  var slide = SlidesApp.getActivePresentation().getSlides()[0];
+  var slide = SlidesApp.getActivePresentation().getSelection().getCurrentPage();
   var allImage = slide.getImages();
   var imageSlide = undefined;
   for(var i = 0; i < allImage.length; i++){
