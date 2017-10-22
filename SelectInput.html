@@ -8274,8 +8274,23 @@ var _user$project$Main$infoFooter = A2(
 			{ctor: '[]'},
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html$text(' Stuff '),
-				_1: {ctor: '[]'}
+				_0: _elm_lang$html$Html$text('Code at '),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$a,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$href('https://github.com/brendena/MathEquationsGoogleSlide'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Github Repo / For Bug Reports'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
 			}),
 		_1: {
 			ctor: '::',
@@ -8284,77 +8299,52 @@ var _user$project$Main$infoFooter = A2(
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text('Written by '),
+					_0: A2(
+						_elm_lang$html$Html$a,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$href('mailto:bafeaturerequest@gmail.com?Subject=Bug%20or%20Feature'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Message me'),
+							_1: {ctor: '[]'}
+						}),
 					_1: {
 						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$a,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$href('https://github.com/evancz'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Evan Czaplicki'),
-								_1: {ctor: '[]'}
-							}),
+						_0: _elm_lang$html$Html$text(' at bafeaturerequest@gmail.com'),
 						_1: {ctor: '[]'}
 					}
 				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$p,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text('Part of '),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$a,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$href('http://todomvc.com'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('TodoMVC'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}
-					}),
-				_1: {ctor: '[]'}
-			}
+			_1: {ctor: '[]'}
 		}
 	});
-var _user$project$Main$infoHeader = A2(
-	_elm_lang$html$Html$header,
-	{ctor: '[]'},
+var _user$project$Main$helpPageStyles = function (bool) {
+	return _elm_lang$core$Native_Utils.eq(bool, true) ? _elm_lang$html$Html_Attributes$style(
+		{
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'transform', _1: 'scale(1,1)'},
+			_1: {ctor: '[]'}
+		}) : _elm_lang$html$Html_Attributes$style(
+		{
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'transform', _1: 'scale(1,0)'},
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Main$myStyle = _elm_lang$html$Html_Attributes$style(
 	{
 		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$h1,
-			{ctor: '[]'},
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text('Math'),
-				_1: {ctor: '[]'}
-			}),
+		_0: {ctor: '_Tuple2', _0: 'backgroundColor', _1: 'red'},
 		_1: {
 			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$h1,
-				{ctor: '[]'},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text('Equations'),
-					_1: {ctor: '[]'}
-				}),
-			_1: {ctor: '[]'}
+			_0: {ctor: '_Tuple2', _0: 'height', _1: '90px'},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'width', _1: '100%'},
+				_1: {ctor: '[]'}
+			}
 		}
 	});
 var _user$project$Main$viewOption = function (mathType) {
@@ -8430,14 +8420,15 @@ var _user$project$Main$sumitEquation = _elm_lang$core$Native_Platform.outgoingPo
 	});
 var _user$project$Main$updatingLinkedMathEquation = _elm_lang$core$Native_Platform.incomingPort('updatingLinkedMathEquation', _elm_lang$core$Json_Decode$string);
 var _user$project$Main$updatingMathEquation = _elm_lang$core$Native_Platform.incomingPort('updatingMathEquation', _elm_lang$core$Json_Decode$string);
-var _user$project$Main$Model = F3(
-	function (a, b, c) {
-		return {mathType: a, linkedMathEquation: b, mathEquation: c};
+var _user$project$Main$updateErrorMessage = _elm_lang$core$Native_Platform.incomingPort('updateErrorMessage', _elm_lang$core$Json_Decode$string);
+var _user$project$Main$Model = F5(
+	function (a, b, c, d, e) {
+		return {mathType: a, linkedMathEquation: b, mathEquation: c, errorMessage: d, helpPageOpen: e};
 	});
 var _user$project$Main$Tex = {ctor: 'Tex'};
 var _user$project$Main$init = {
 	ctor: '_Tuple2',
-	_0: A3(_user$project$Main$Model, _user$project$Main$Tex, '', ''),
+	_0: A5(_user$project$Main$Model, _user$project$Main$Tex, '', '', '', false),
 	_1: _elm_lang$core$Platform_Cmd$none
 };
 var _user$project$Main$AsciiMath = {ctor: 'AsciiMath'};
@@ -8473,14 +8464,19 @@ var _user$project$Main$update = F2(
 		var _p2 = msg;
 		switch (_p2.ctor) {
 			case 'MathTypeChange':
+				var newModel = _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						mathType: _user$project$Main$fromOptionString(_p2._0)
+					});
 				return {
 					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{
-							mathType: _user$project$Main$fromOptionString(_p2._0)
-						}),
-					_1: _elm_lang$core$Platform_Cmd$none
+					_0: newModel,
+					_1: _user$project$Main$updateEquaion(
+						A2(
+							_elm_lang$core$Json_Encode$encode,
+							0,
+							_user$project$Main$encodeModel(newModel)))
 				};
 			case 'ReloadEquaion':
 				return {
@@ -8511,7 +8507,7 @@ var _user$project$Main$update = F2(
 							0,
 							_user$project$Main$encodeModel(newModel)))
 				};
-			default:
+			case 'SetLinkedMathEquation':
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
@@ -8519,6 +8515,198 @@ var _user$project$Main$update = F2(
 						{linkedMathEquation: _p2._0}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
+			case 'ToggleHelpPage':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{helpPageOpen: _p2._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{errorMessage: _p2._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+		}
+	});
+var _user$project$Main$UpdateErrorMessage = function (a) {
+	return {ctor: 'UpdateErrorMessage', _0: a};
+};
+var _user$project$Main$ToggleHelpPage = function (a) {
+	return {ctor: 'ToggleHelpPage', _0: a};
+};
+var _user$project$Main$helpPage = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id('helpPage'),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Main$helpPageStyles(model.helpPageOpen),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h2,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Help Page'),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$span,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$id('exitIcon'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(
+										_user$project$Main$ToggleHelpPage(false)),
+									_1: {ctor: '[]'}
+								}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(' X'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$h3,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('Create a Equation'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$p,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									'To create a image out of your equation you must first select the type of format your math equation is in.  Then type your equation inside the',
+									A2(_elm_lang$core$Basics_ops['++'], 'text box.  Right underneath the text box will be a example of the output.  Once you are done hit the submit button and it will create a image of the', 'equation'))),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$h3,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Updating Equation'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$p,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(
+										A2(_elm_lang$core$Basics_ops['++'], 'To update a image select the image you want and hit the reload icon.  This will bind the image to the extension and whenever you hit the submit', 'the submit button it will update the image.  To stop updating a image hit the unconnect button.')),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$img,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$id('logo'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$src('https://github.com/brendena/MathEquationsGoogleSlide/blob/master/image/96x96.png?raw=true'),
+											_1: {ctor: '[]'}
+										}
+									},
+									{ctor: '[]'}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _user$project$Main$infoHeader = A2(
+	_elm_lang$html$Html$header,
+	{ctor: '[]'},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$h1,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('<Math>'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h1,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('</Equations>'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$img,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$id('helpIcon'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(
+								_user$project$Main$ToggleHelpPage(true)),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$src('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBTdmcgVmVjdG9yIEljb25zIDogaHR0cDovL3d3dy5vbmxpbmV3ZWJmb250cy5jb20vaWNvbiAtLT4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyBvbmNsaWNrPSJ0b2dnbGVIZWxwUGFnZSgpIiBpZD0iaGVscEljb24iIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAxMDAwIDEwMDAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDEwMDAgMTAwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxtZXRhZGF0YT4gU3ZnIFZlY3RvciBJY29ucyA6IGh0dHA6Ly93d3cub25saW5ld2ViZm9udHMuY29tL2ljb24gPC9tZXRhZGF0YT4KPGc+PHBhdGggZD0iTTUwMC4xLDkuOUMyMjkuNCw5LjksMTAsMjI5LjEsMTAsNDk5LjhjMCwyNzAuNywyMTkuNCw0OTAuMyw0OTAuMSw0OTAuM1M5OTAsNzcwLjUsOTkwLDQ5OS44Qzk5MCwyMjkuMSw3NzAuNyw5LjksNTAwLjEsOS45eiBNNTAwLjMsODc5LjJjLTIwOS41LDAtMzc5LjYtMTY5LjktMzc5LjYtMzc5LjVjMC0yMDkuNCwxNzAtMzc5LDM3OS42LTM3OWMyMDkuMiwwLDM3OSwxNjkuNiwzNzksMzc5Qzg3OS4yLDcwOS40LDcwOS41LDg3OS4yLDUwMC4zLDg3OS4yeiIvPjxwYXRoIGQ9Ik00NTcuNyw2NDUuNWg5M3YtNzIuN2MwLTE5LjYsOS4yLTM4LDMzLjgtNTQuMmMyNC4zLTE2LjEsOTIuNy00OC42LDkyLjctMTM0LjFjMC04NS43LTcxLjgtMTQ0LjctMTMyLTE1Ny4yYy02MC41LTEyLjUtMTI1LjktNC4zLTE3Mi4xLDQ2LjVjLTQxLjYsNDUuMy01MC4zLDgxLjUtNTAuMywxNjAuOWg5M3YtMTguNmMwLTQyLjEsNC45LTg2LjksNjUuNC05OS4xYzMzLTYuNyw2NCwzLjgsODIuMywyMS42YzIxLjEsMjAuNiwyMS4xLDY2LjctMTIuMyw4OS45bC01Mi41LDM1LjVjLTMwLjYsMTkuOC00MC45LDQxLjYtNDAuOSw3My43VjY0NS41TDQ1Ny43LDY0NS41eiIvPjxwYXRoIGQ9Ik01MDQuMyw2ODEuOWMyNi4zLDAsNDcuOCwyMS40LDQ3LjgsNDcuOWMwLDI2LjUtMjEuNSw0Ny44LTQ3LjgsNDcuOGMtMjYuNiwwLTQ4LjMtMjEuNC00OC4zLTQ3LjhDNDU2LjEsNzAzLjMsNDc3LjcsNjgxLjksNTA0LjMsNjgxLjl6Ii8+PC9nPgo8L3N2Zz4='),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$img,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$id('logo'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$src('https://github.com/brendena/MathEquationsGoogleSlide/blob/master/image/96x96.png?raw=true'),
+								_1: {ctor: '[]'}
+							}
+						},
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
 		}
 	});
 var _user$project$Main$UpdateEquaion = function (a) {
@@ -8547,80 +8735,142 @@ var _user$project$Main$MathTypeChange = function (a) {
 var _user$project$Main$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
-		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id('elmContainer'),
+			_1: {ctor: '[]'}
+		},
 		{
 			ctor: '::',
 			_0: _user$project$Main$infoHeader,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$select,
+					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$MathTypeChange),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$id('selectMathType'),
-							_1: {ctor: '[]'}
-						}
+						_0: _elm_lang$html$Html_Attributes$id('siteMainContent'),
+						_1: {ctor: '[]'}
 					},
 					{
 						ctor: '::',
-						_0: _user$project$Main$viewOption(_user$project$Main$Tex),
-						_1: {
-							ctor: '::',
-							_0: _user$project$Main$viewOption(_user$project$Main$MathML),
-							_1: {
+						_0: A2(
+							_elm_lang$html$Html$select,
+							{
 								ctor: '::',
-								_0: _user$project$Main$viewOption(_user$project$Main$AsciiMath),
-								_1: {ctor: '[]'}
-							}
-						}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$textarea,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$id('textAreaMathEquation'),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$placeholder('get changed'),
+								_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$MathTypeChange),
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$UpdateEquaion),
+									_0: _elm_lang$html$Html_Attributes$id('selectMathType'),
+									_1: {ctor: '[]'}
+								}
+							},
+							{
+								ctor: '::',
+								_0: _user$project$Main$viewOption(_user$project$Main$Tex),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Main$viewOption(_user$project$Main$MathML),
 									_1: {
 										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$value(model.mathEquation),
+										_0: _user$project$Main$viewOption(_user$project$Main$AsciiMath),
 										_1: {ctor: '[]'}
 									}
 								}
-							}
-						},
-						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{ctor: '[]'},
-							{
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$button,
-									{
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$textarea,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$id('textAreaMathEquation'),
+									_1: {
 										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$id('submitMathEquation'),
+										_0: _elm_lang$html$Html_Attributes$placeholder('get changed'),
 										_1: {
 											ctor: '::',
-											_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$SumitEquation),
-											_1: {ctor: '[]'}
+											_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$UpdateEquaion),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$value(model.mathEquation),
+												_1: {ctor: '[]'}
+											}
 										}
-									},
+									}
+								},
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{ctor: '[]'},
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html$text('submit'),
-										_1: {ctor: '[]'}
+										_0: A2(
+											_elm_lang$html$Html$button,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$id('submitMathEquation'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$SumitEquation),
+													_1: {ctor: '[]'}
+												}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('submit'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$div,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$id('reloadContainer'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$button,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$ReloadEquaion),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text('reload'),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$button,
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Events$onClick(
+																	_user$project$Main$SetLinkedMathEquation('')),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$hidden(
+																		_elm_lang$core$String$isEmpty(model.linkedMathEquation)),
+																	_1: {ctor: '[]'}
+																}
+															},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text('unconnect'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {ctor: '[]'}
+										}
 									}),
 								_1: {
 									ctor: '::',
@@ -8628,104 +8878,26 @@ var _user$project$Main$view = function (model) {
 										_elm_lang$html$Html$div,
 										{
 											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$id('reloadContainer'),
+											_0: _elm_lang$html$Html_Attributes$id('SvgContainer'),
 											_1: {ctor: '[]'}
 										},
 										{
 											ctor: '::',
 											_0: A2(
-												_elm_lang$html$Html$button,
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$ReloadEquaion),
-													_1: {ctor: '[]'}
-												},
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html$text('reload'),
-													_1: {ctor: '[]'}
-												}),
-											_1: {
-												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$button,
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html_Events$onClick(
-															_user$project$Main$SetLinkedMathEquation('')),
-														_1: {
-															ctor: '::',
-															_0: _elm_lang$html$Html_Attributes$hidden(
-																_elm_lang$core$String$isEmpty(model.linkedMathEquation)),
-															_1: {ctor: '[]'}
-														}
-													},
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html$text('unconnect'),
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}
-										}),
-									_1: {ctor: '[]'}
-								}
-							}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$p,
-								{ctor: '[]'},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text(model.linkedMathEquation),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$div,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$id('SvgContainer'),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$p,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$id('AsciiMathEquation'),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$hidden(
-														!_elm_lang$core$Native_Utils.eq(_user$project$Main$AsciiMath, model.mathType)),
-													_1: {ctor: '[]'}
-												}
-											},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text('Ascii `` '),
-												_1: {ctor: '[]'}
-											}),
-										_1: {
-											ctor: '::',
-											_0: A2(
 												_elm_lang$html$Html$p,
 												{
 													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$id('TexEquation'),
+													_0: _elm_lang$html$Html_Attributes$id('AsciiMathEquation'),
 													_1: {
 														ctor: '::',
 														_0: _elm_lang$html$Html_Attributes$hidden(
-															!_elm_lang$core$Native_Utils.eq(_user$project$Main$Tex, model.mathType)),
+															!_elm_lang$core$Native_Utils.eq(_user$project$Main$AsciiMath, model.mathType)),
 														_1: {ctor: '[]'}
 													}
 												},
 												{
 													ctor: '::',
-													_0: _elm_lang$html$Html$text('Tex ${}$ '),
+													_0: _elm_lang$html$Html$text('Ascii `` '),
 													_1: {ctor: '[]'}
 												}),
 											_1: {
@@ -8734,30 +8906,105 @@ var _user$project$Main$view = function (model) {
 													_elm_lang$html$Html$p,
 													{
 														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$id('MathMLEquation'),
+														_0: _elm_lang$html$Html_Attributes$id('TexEquation'),
 														_1: {
 															ctor: '::',
 															_0: _elm_lang$html$Html_Attributes$hidden(
-																!_elm_lang$core$Native_Utils.eq(_user$project$Main$MathML, model.mathType)),
+																!_elm_lang$core$Native_Utils.eq(_user$project$Main$Tex, model.mathType)),
 															_1: {ctor: '[]'}
 														}
 													},
 													{
 														ctor: '::',
-														_0: _elm_lang$html$Html$text(''),
+														_0: _elm_lang$html$Html$text('Tex ${}$ '),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$div,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$hidden(
+																!_elm_lang$core$Native_Utils.eq(_user$project$Main$MathML, model.mathType)),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$p,
+																{ctor: '[]'},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('MathML'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$p,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$id('MathMLEquation'),
+																		_1: {ctor: '[]'}
+																	},
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text(''),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {ctor: '[]'}
+															}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$id('ErrorMessage'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$hidden(
+														_elm_lang$core$String$isEmpty(model.errorMessage)),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Events$onClick(
+															_user$project$Main$UpdateErrorMessage('')),
+														_1: {ctor: '[]'}
+													}
+												}
+											},
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$p,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text(
+															A2(_elm_lang$core$Basics_ops['++'], 'Error - ', model.errorMessage)),
 														_1: {ctor: '[]'}
 													}),
 												_1: {ctor: '[]'}
-											}
-										}
-									}),
-								_1: {
-									ctor: '::',
-									_0: _user$project$Main$infoFooter,
-									_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
 								}
 							}
 						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Main$helpPage(model),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Main$infoFooter,
+						_1: {ctor: '[]'}
 					}
 				}
 			}
