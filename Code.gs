@@ -15,7 +15,7 @@ function PropertiesTypes(){
 }
 
 function onOpen() {
-  SlidesApp.getUi().createMenu('Math Extension')
+  SlidesApp.getUi().createMenu('Math Equations')
       .addItem('Menu', 'showSidebar')
       //.addItem('Refresh Data', 'loadDataToSpreadSheet')
       .addToUi();
