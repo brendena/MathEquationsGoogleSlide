@@ -263,8 +263,9 @@ infoFooter =
 subscriptions : Model -> Sub Msg
 subscriptions model =
   Sub.batch[
-    updatingLinkedMathEquation SetLinkedMathEquation
-    ,updatingMathEquation UpdateEquaion
+      updatingLinkedMathEquation SetLinkedMathEquation
+    , updatingMathEquation UpdateEquaion
+    , updateErrorMessage UpdateErrorMessage
   ]
   
 
