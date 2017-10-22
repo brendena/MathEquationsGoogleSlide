@@ -223,17 +223,17 @@ helpPageStyles bool =
 helpPage : Model -> Html Msg
 helpPage model = 
     div [id "helpPage", helpPageStyles model.helpPageOpen]
-           [h2 [] [text "Help Page",span [id "exitIcon", onClick (ToggleHelpPage False) ] [text " X"]],
-            
+           [
+            h2 [] [text "Help Page",span [id "exitIcon", onClick (ToggleHelpPage False) ] [text " X"]],
             h3 [] [text "Create a Equation"],
-            p [] [text ("To create a image out of your equation you must first select the type of format your math equation is in.  Then type your equation inside the" ++
-                  "text box.  Right underneath the text box will be a example of the output.  Once you are done hit the submit button and it will create a image of the" ++
+            p [] [text ("To create a image out of your equation you must first select the type of format your math equation is in.  Then type your equation inside the " ++
+                  "text box.  Right underneath the text box will be a example of the output.  Once you are done hit the submit button and it will create a image of the " ++
                   "equation")],
             h3 [] [text "Updating Equation"],
-            p [] [text ("To update a image select the image you want and hit the reload icon.  This will bind the image to the extension and whenever you hit the submit" ++
+            p [] [text ("To update a image select the image you want and hit the reload icon.  This will bind the image to the extension and whenever you hit the submit " ++
                         "the submit button it will update the image.  To stop updating a image hit the unconnect button.")],
             img [id "logo" , src "https://github.com/brendena/MathEquationsGoogleSlide/blob/master/image/96x96.png?raw=true"] []
-             ]
+           ]
 
 
 infoHeader : Html Msg
