@@ -72,7 +72,7 @@
             }
             #logo{
                 position: fixed;
-                right: 25px;
+                right: 5px;
                 top: 10px;
                 height: 60px;
                 transform: rotate(355deg);
@@ -101,12 +101,14 @@
             }
 
             #exitIcon{
+                cursor: pointer;
                 margin-left:30px;
             }
             #helpIcon{
-                height: 30px;
+                height: 20px;
+                cursor: pointer;
                 position: absolute;
-                top: 40px;
+                top: 10px;
                 right: 30%;
             }
         </style>
@@ -114,9 +116,10 @@
     <body>
     <div id="main"></div>
     <canvas id="myCanvas" width="800px" style="display:none">
-    
-        <script src="SelectInput.js"></script>
+     <?!= include('SelectInput'); ?>
+       
      <!--
+          <script src="SelectInput.js"></script>
          <?!= include('SelectInput'); ?>
      
      -->
@@ -223,11 +226,13 @@
            console.log("testing");
         });
         
+        
         var success = function (){
           console.log("success")
         }
         var error = function(error){
           console.log(error)
+          app.ports.updateErrorMessage(error);
         }
         
         /*
