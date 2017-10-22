@@ -4,6 +4,9 @@ https://developers.google.com/apps-script/guides/slides/presentations
 
 https://developers.google.com/apps-script/reference/slides/slides-app
 */
+/**
+ * @OnlyCurrentDoc
+ */
 
 function PropertiesTypes(){
   return {
