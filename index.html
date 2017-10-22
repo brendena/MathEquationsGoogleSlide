@@ -111,6 +111,10 @@
                 top: 10px;
                 right: 30%;
             }
+            #ErrorMessage{
+              background: #ff5e5e;
+              padding: 10px;
+            }
         </style>
     </head>
     <body>
@@ -232,7 +236,7 @@
         }
         var error = function(error){
           console.log(error)
-          app.ports.updateErrorMessage(error);
+          app.ports.updateErrorMessage.send(error.toString());
         }
         
         /*
