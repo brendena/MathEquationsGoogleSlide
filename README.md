@@ -18,3 +18,4 @@
   - Cleaner Error Messages
   - Make sure that the Google Auth is set up properly
   - Add google analytics 
+  - Minify the output of the elm script
