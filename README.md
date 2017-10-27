@@ -1,6 +1,6 @@
 ![Master Google sheets documents icon](https://github.com/brendena/MathEquationsGoogleSlide/blob/master/image/96x96.png?raw=true)
 
-# MathEquationsGoogleSlide - Pending Review Store
+# ![MathEquationsGoogleSlide](https://chrome.google.com/webstore/detail/math-equations/edbiogkpgmbdkmgmdcdmgminoahbcdml?hl=en)
   Allows you to create beatiful images from layout scripting languages.
 
 ## Supported Languages
