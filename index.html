@@ -192,8 +192,10 @@
             var equationJson = JSON.parse(equationObject)
             console.log(equationJson)
             var divIdEquation = equationJson["mathType"] + "Equation";
+            console.log(divIdEquation)
             var math = MathJax.Hub.getAllJax(divIdEquation)[0];
             if("MathML" == equationJson["mathType"]){
+                document.getElementById(divIdEquation).innerHTML = ""
                 document.getElementById(divIdEquation).innerHTML = equationJson["mathEquation"];
                 MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
             }
