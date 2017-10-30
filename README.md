@@ -1,13 +1,21 @@
 ![Master Google sheets documents icon](https://github.com/brendena/MathEquationsGoogleSlide/blob/master/image/96x96.png?raw=true)
 
-# MathEquationsGoogleSlide
+# ![MathEquationsGoogleSlide](https://chrome.google.com/webstore/detail/math-equations/edbiogkpgmbdkmgmdcdmgminoahbcdml?hl=en)
+  Allows you to create beatiful images from layout scripting languages.
 
+## Supported Languages
+ * Latex
+ * AsciiMath
+ * MathML
 
+![Example UI Layout](https://github.com/brendena/MathEquationsGoogleSlide/blob/master/image/Example.png?raw=true)
 
-## goal 
-
-1. Is to create a app that render mathml and latex formula's into a google spreadsheet
-
-2. To use react and redux for all the internals / Maby Elm
-
-3. Hold the context of the content of the equation in the Description PageElement -> Image -> Description
+## How it works
+  Most of the app is build with Elm.  It has a few ports to manage interaction with Google Script and to work with MathJax.
+  
+## ToDo
+  - Currently if you delete a image the equations information is still save storage.  On everload i need to check internal storage and compare the images inisde of the internal storage with the one's inside of the slideshow.
+  - Cleaner Error Messages
+  - Make sure that the Google Auth is set up properly
+  - Add google analytics 
+  - Minify the output of the elm script
