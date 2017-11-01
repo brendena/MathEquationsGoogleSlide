@@ -71,7 +71,7 @@
               padding-bottom: 0px;
             }
             #logo{
-                position: fixed;
+                position: absolute;
                 right: 5px;
                 top: 10px;
                 height: 60px;
@@ -87,6 +87,7 @@
                 transform: scale(1,0);
                 transition: 1s;
                 border: 2vw solid black;
+                overflow:auto;
             }
             #siteMainContent{
                 flex: 1;
@@ -114,6 +115,9 @@
             #ErrorMessage{
               background: #ff5e5e;
               padding: 10px;
+            }
+            #SvgContainer{
+              overflow:scroll;
             }
         </style>
     </head>
@@ -191,26 +195,23 @@
             
             var equationJson = JSON.parse(equationObject)
             var divIdEquation = equationJson["mathType"] + "Equation";
+            var divEquation = document.getElementById(divIdEquation)
             console.log(divIdEquation)
             var math = MathJax.Hub.getAllJax(divIdEquation)[0];
+            divEquation.style.width = "1000px";
             // page on live reloading
             // https://docs.mathjax.org/en/v1.0/typeset.html 
             if("MathML" == equationJson["mathType"]){
-<<<<<<< HEAD
-                document.getElementById(divIdEquation).innerHTML = ""
-                document.getElementById(divIdEquation).innerHTML = equationJson["mathEquation"];
-                MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
-=======
-                document.getElementById(divIdEquation).innerHTML =  '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">' + 
+                divEquation.innerHTML =  '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">' + 
                                                                      equationJson["mathEquation"] +
                                                                      '</math>'
                 MathJax.Hub.Queue(["Typeset",MathJax.Hub,divIdEquation]);
->>>>>>> be1f1ddb45c76371f266f998879d28b0107ee62d
             }
             else{
                 MathJax.Hub.Queue(["Text",math,equationJson["mathEquation"]]);
             }
 
+            setTimeout(function(){ divEquation.style.width = "inherit"; }, 100);
             
             
             //MathJax.Hub.Queue(["Text",math,str]);
