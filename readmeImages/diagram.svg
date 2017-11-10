@@ -16,7 +16,10 @@
    id="svg4136"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="diagram.svg">
+   sodipodi:docname="diagram.svg"
+   inkscape:export-filename="/home/brenden/Downloads/diagram"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs4138">
     <marker
@@ -2061,7 +2064,7 @@ rkJggg==
          sodipodi:role="line"
          id="tspan8345"
          x="90.762352"
-         y="774.09705">- Handle All the </tspan><tspan
+         y="774.09705">- Handle All the UI (No Styles) </tspan><tspan
          sodipodi:role="line"
          x="90.762352"
          y="806.3078"
