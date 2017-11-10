@@ -122,6 +122,7 @@
         </style>
     </head>
     <body>
+    <!-- <button id="test">test</button> -->
     <div id="main"></div>
     <canvas id="myCanvas" width="800px" style="display:none">
      <?!= include('SelectInput'); ?>
@@ -226,8 +227,8 @@
                 drawInlineSVG(svg, function(){
                     var image = canvas.toDataURL("image/png");
                     //console.log(image)
-                jsonElmRequest["image"] = image.split("base64,")[1]
-                google.script.run.withSuccessHandler(success).withFailureHandler(error).setImage(jsonElmRequest);
+                    jsonElmRequest["image"] = image.split("base64,")[1]
+                    google.script.run.withSuccessHandler(success).withFailureHandler(error).setImage(jsonElmRequest);
                 });    
             }
         });
@@ -267,7 +268,12 @@
             }
             img.src = 'data:image/svg+xml; charset=utf8, '+encodeURIComponent(svgURL);
         }
-  
+      /*  
+      document.getElementById("test").addEventListener("click", function(){            
+        console.log("testing");            
+        google.script.run.withSuccessHandler(success).withFailureHandler(error).showEquationEditingMenu();            
+      } );
+      */
     </script>
      
     </body>
