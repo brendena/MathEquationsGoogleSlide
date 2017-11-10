@@ -15,11 +15,11 @@
  ![diagram on how it works](https://github.com/brendena/MathEquationsGoogleSlide/blob/master/readmeImages/diagram.png?raw=true)
   
 
-### Elm
+### Elm version - 0.18
 
   * **Compilling** Elm code its compiled to SelectInput.js.  Then i use a bash script to convert it to SelectInput.html which i include in index.html
   
-There nothing really fancy.  But if your new to elm here are some resources
+Good Resources on Elm
   * [quick examples](http://elm-lang.org/examples)
   * [great book](https://www.elm-tutorial.org/en/05-resources/02-models.html)
 
