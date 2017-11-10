@@ -38,15 +38,15 @@ There nothing really fancy.  But if your new to elm here are some resources
 
 ## Build
 ### Local Development
-  * remove any **<\?!= include('Text'); ?>**  
-  * make sure **<script src="SelectInput.js"></script>** is included
+  * remove any **<\?!= include('Text'); ?>**  -index.html
+  * make sure **<script src="SelectInput.js"></script>** is included -index.html
   * elm-make SelectInput.elm --output=SelectInput.js
   * Then you can open the index.html page
   
 ### Google Extension Development
   * Use this [extension](https://chrome.google.com/webstore/detail/google-apps-script-github/lfjcgcmkmjjlieihflfhjopckgpelofo) to pull the latest code from a github repo
-  * add **<\?!= include('Text'); ?>**
-  * remove **<script src="SelectInput.js"></script>**
+  * add **<\?!= include('Text'); ?>** -index.html
+  * remove **<script src="SelectInput.js"></script>** -index.html
   
 ## Pushing Code
 ### Local Development
