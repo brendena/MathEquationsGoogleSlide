@@ -120,12 +120,15 @@
     <body>
     <div id="main"></div>
     <canvas id="myCanvas" width="800px" style="display:none">
-     <?!= include('SelectInput'); ?>
+        <script src="SelectInput.js"></script>
        
      <!--
-          <script src="SelectInput.js"></script>
-         <?!= include('SelectInput'); ?>
-     
+
+        used when locally developing
+        <script src="SelectInput.js"></script>
+        used with google app script 
+        <?!= include('SelectInput'); ?>
+    
      -->
     
     <script type="text/javascript" async
@@ -196,16 +199,10 @@
             // page on live reloading
             // https://docs.mathjax.org/en/v1.0/typeset.html 
             if("MathML" == equationJson["mathType"]){
-<<<<<<< HEAD
-                document.getElementById(divIdEquation).innerHTML = ""
-                document.getElementById(divIdEquation).innerHTML = equationJson["mathEquation"];
-                MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
-=======
                 document.getElementById(divIdEquation).innerHTML =  '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">' + 
                                                                      equationJson["mathEquation"] +
                                                                      '</math>'
                 MathJax.Hub.Queue(["Typeset",MathJax.Hub,divIdEquation]);
->>>>>>> be1f1ddb45c76371f266f998879d28b0107ee62d
             }
             else{
                 MathJax.Hub.Queue(["Text",math,equationJson["mathEquation"]]);
