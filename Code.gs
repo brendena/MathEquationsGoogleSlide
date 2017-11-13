@@ -4,6 +4,10 @@ https://developers.google.com/apps-script/guides/slides/presentations
 
 https://developers.google.com/apps-script/reference/slides/slides-app
 */
+/*            
+very cool example             
+https://chrome.google.com/webstore/detail/equatio-math-made-digital/hjngolefdpdnooamgdldlkjgmdcmcjnc            
+*/
 /**
  * @OnlyCurrentDoc
  */

@@ -71,7 +71,7 @@
               padding-bottom: 0px;
             }
             #logo{
-                position: fixed;
+                position: absolute;
                 right: 5px;
                 top: 10px;
                 height: 60px;
@@ -87,6 +87,7 @@
                 transform: scale(1,0);
                 transition: 1s;
                 border: 2vw solid black;
+                overflow:auto;
             }
             #siteMainContent{
                 flex: 1;
@@ -115,17 +116,22 @@
               background: #ff5e5e;
               padding: 10px;
             }
+            #SvgContainer{
+              overflow:scroll;
+            }
         </style>
     </head>
     <body>
     <div id="main"></div>
     <canvas id="myCanvas" width="800px" style="display:none">
-        <script src="SelectInput.js"></script>
+    
+    <script src="SelectInput.js"></script>
        
      <!--
 
         used when locally developing
         <script src="SelectInput.js"></script>
+        
         used with google app script 
         <?!= include('SelectInput'); ?>
     
@@ -188,32 +194,47 @@
         var divSvmEquation = "SvgContainer";
         var node = document.getElementById('main');
         var app = Elm.Main.embed(node);
+        /*start a timer whenever 
+          updateEquation is called.
+          Then you can remove it
+          if its been called to much.
+          This reduces the amount of
+          items you put on the 
+          MathJax.Hub.Queue
+        */
+        var submitTimer = undefined;
         // receive something from Elm
         app.ports.updateEquaion.subscribe(function (equationObject) {
             console.log(equationObject);
+            clearTimeout(submitTimer);
+            submitTimer = setTimeout(function(){
+              var equationJson = JSON.parse(equationObject)
+              var divIdEquation = equationJson["mathType"] + "Equation";
+              var divEquation = document.getElementById(divIdEquation)
+              console.log(divIdEquation)
+              var math = MathJax.Hub.getAllJax(divIdEquation)[0];
+              divEquation.style.width = "1000px";
+              // page on live reloading
+              // https://docs.mathjax.org/en/v1.0/typeset.html 
+              if("MathML" == equationJson["mathType"]){
+                  divEquation.innerHTML =  '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">' + 
+                                                                       equationJson["mathEquation"] +
+                                                                       '</math>'
+                  MathJax.Hub.Queue(["Typeset",MathJax.Hub,divIdEquation]);
+              }
+              else{
+                  MathJax.Hub.Queue(["Text",math,equationJson["mathEquation"]]);
+              }
+              //this timeout allows MathJax to create the svg on a larger width then
+              // convert it make to the width it could be
+              setTimeout(function(){divEquation.style.width = "inherit";  }, 30);
+            },100);
             
-            var equationJson = JSON.parse(equationObject)
-            var divIdEquation = equationJson["mathType"] + "Equation";
-            console.log(divIdEquation)
-            var math = MathJax.Hub.getAllJax(divIdEquation)[0];
-            // page on live reloading
-            // https://docs.mathjax.org/en/v1.0/typeset.html 
-            if("MathML" == equationJson["mathType"]){
-                document.getElementById(divIdEquation).innerHTML =  '<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">' + 
-                                                                     equationJson["mathEquation"] +
-                                                                     '</math>'
-                MathJax.Hub.Queue(["Typeset",MathJax.Hub,divIdEquation]);
-            }
-            else{
-                MathJax.Hub.Queue(["Text",math,equationJson["mathEquation"]]);
-            }
 
-            
-            
-            //MathJax.Hub.Queue(["Text",math,str]);
+
         });
         app.ports.sumitEquation.subscribe(function(str){
-            console.log("submitting equations " + str)
+            //console.log("submitting equations " + str)
             jsonElmRequest = JSON.parse(str)
             var divSvg = document.getElementById(jsonElmRequest["mathType"] + "Equation");
             if(divSvg != null){
@@ -222,8 +243,8 @@
                 drawInlineSVG(svg, function(){
                     var image = canvas.toDataURL("image/png");
                     //console.log(image)
-                jsonElmRequest["image"] = image.split("base64,")[1]
-                google.script.run.withSuccessHandler(success).withFailureHandler(error).setImage(jsonElmRequest);
+                    jsonElmRequest["image"] = image.split("base64,")[1]
+                    google.script.run.withSuccessHandler(success).withFailureHandler(error).setImage(jsonElmRequest);
                 });    
             }
         });
@@ -263,7 +284,7 @@
             }
             img.src = 'data:image/svg+xml; charset=utf8, '+encodeURIComponent(svgURL);
         }
-  
+
     </script>
      
     </body>
