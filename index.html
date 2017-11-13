@@ -125,7 +125,7 @@
     <div id="main"></div>
     <canvas id="myCanvas" width="800px" style="display:none">
     
-    <script src="SelectInput.js"></script>
+    <?!= include('SelectInput'); ?>
        
      <!--
 
@@ -205,13 +205,11 @@
         var submitTimer = undefined;
         // receive something from Elm
         app.ports.updateEquaion.subscribe(function (equationObject) {
-            console.log(equationObject);
             clearTimeout(submitTimer);
             submitTimer = setTimeout(function(){
               var equationJson = JSON.parse(equationObject)
               var divIdEquation = equationJson["mathType"] + "Equation";
               var divEquation = document.getElementById(divIdEquation)
-              console.log(divIdEquation)
               var math = MathJax.Hub.getAllJax(divIdEquation)[0];
               divEquation.style.width = "1000px";
               // page on live reloading
@@ -250,12 +248,10 @@
         });
         app.ports.reloadEquaion.subscribe(function(str){
            google.script.run.withSuccessHandler(function(results){
-               console.log(results);
                app.ports.updatingLinkedMathEquation.send(results.objectId)
                app.ports.updatingMathEquation.send(results.equation)
                
            }).withFailureHandler(error).getLinkedToImage();
-           console.log("testing");
         });
         
         
