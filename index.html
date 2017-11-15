@@ -119,6 +119,11 @@
             #SvgContainer{
               overflow:scroll;
             }
+            #selectInput{
+                width:100%;
+                border-radius: 0px;
+                background: white;
+            }
         </style>
     </head>
     <body>
@@ -205,13 +210,11 @@
         var submitTimer = undefined;
         // receive something from Elm
         app.ports.updateEquaion.subscribe(function (equationObject) {
-            console.log(equationObject);
             clearTimeout(submitTimer);
             submitTimer = setTimeout(function(){
               var equationJson = JSON.parse(equationObject)
               var divIdEquation = equationJson["mathType"] + "Equation";
               var divEquation = document.getElementById(divIdEquation)
-              console.log(divIdEquation)
               var math = MathJax.Hub.getAllJax(divIdEquation)[0];
               divEquation.style.width = "1000px";
               // page on live reloading
@@ -234,15 +237,15 @@
 
         });
         app.ports.sumitEquation.subscribe(function(str){
-            //console.log("submitting equations " + str)
             jsonElmRequest = JSON.parse(str)
             var divSvg = document.getElementById(jsonElmRequest["mathType"] + "Equation");
             if(divSvg != null){
                 var svg = divSvg.getElementsByTagName("svg")[0];
+                var svgClone = svg.cloneNode(true);
+                svgClone.style.background = jsonElmRequest["mathEquationColor"]
                 var canvas = document.getElementById("myCanvas");
-                drawInlineSVG(svg, function(){
+                drawInlineSVG(svgClone, function(){
                     var image = canvas.toDataURL("image/png");
-                    //console.log(image)
                     jsonElmRequest["image"] = image.split("base64,")[1]
                     google.script.run.withSuccessHandler(success).withFailureHandler(error).setImage(jsonElmRequest);
                 });    
@@ -250,12 +253,10 @@
         });
         app.ports.reloadEquaion.subscribe(function(str){
            google.script.run.withSuccessHandler(function(results){
-               console.log(results);
                app.ports.updatingLinkedMathEquation.send(results.objectId)
                app.ports.updatingMathEquation.send(results.equation)
                
            }).withFailureHandler(error).getLinkedToImage();
-           console.log("testing");
         });
         
         

@@ -39,7 +39,7 @@ main =
 
 init : (Model, Cmd Msg)
 init  =
-  ( Model Tex "" "" "" False, Cmd.none
+  ( Model Tex "" "" "" "#000000" False, Cmd.none
   )
 
 
@@ -52,6 +52,7 @@ type alias Model =
     linkedMathEquation: String,
     mathEquation: String,
     errorMessage: String,
+    mathEquationColor: String,
     helpPageOpen: Bool
   }
 
@@ -66,6 +67,7 @@ encodeModel model =
     [ ("mathType",Json.Encode.string  (toOptionString model.mathType) )
     , ("linkedMathEquation", Json.Encode.string model.linkedMathEquation)
     , ("mathEquation", Json.Encode.string model.mathEquation)
+    , ("mathEquationColor", Json.Encode.string model.mathEquationColor)
     ]
 --("mathType", toOptionString model.mathType) 
     
@@ -112,6 +114,7 @@ type Msg
   | UpdateEquaion String
   | ToggleHelpPage Bool 
   | UpdateErrorMessage String
+  | UpdateMathEquation String
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
@@ -151,6 +154,9 @@ update msg model =
     
     UpdateErrorMessage string ->
       ({ model | errorMessage = string}, Cmd.none)
+    
+    UpdateMathEquation colorChanged ->
+      ({ model | mathEquationColor = colorChanged}, Cmd.none)
 {-
 
  -}
@@ -163,14 +169,13 @@ view model =
      infoHeader,
      div [id "siteMainContent"] [
         select
-        [ onInput MathTypeChange, id "selectMathType"
-        ]
-        [ viewOption Tex
-        , viewOption MathML
-        , viewOption AsciiMath
-       
-        ],
-        textarea [id "textAreaMathEquation", placeholder "get changed", onInput UpdateEquaion, value model.mathEquation] [ ],
+        [ onInput MathTypeChange, id "selectMathType"]
+          [ viewOption Tex
+          , viewOption MathML
+          , viewOption AsciiMath
+          ]
+        , input [id "selectInput", type_ "color", onInput UpdateMathEquation, value model.mathEquationColor, placeholder "select a color needs to be in #FFFFFF format"] []
+        , textarea [id "textAreaMathEquation", onInput UpdateEquaion, value model.mathEquation, placeholder "get changed"] [ ],
         div [] [
             button [id "submitMathEquation", onClick SumitEquation] [text "submit"] , 
             --button [ onClick (SendToJs "testing")] [text "send Info"],
