@@ -8431,6 +8431,7 @@ var _user$project$Main$sumitEquation = _elm_lang$core$Native_Platform.outgoingPo
 		return v;
 	});
 var _user$project$Main$updatingLinkedMathEquation = _elm_lang$core$Native_Platform.incomingPort('updatingLinkedMathEquation', _elm_lang$core$Json_Decode$string);
+var _user$project$Main$updatingMathEquationColor = _elm_lang$core$Native_Platform.incomingPort('updatingMathEquationColor', _elm_lang$core$Json_Decode$string);
 var _user$project$Main$updatingMathEquation = _elm_lang$core$Native_Platform.incomingPort('updatingMathEquation', _elm_lang$core$Json_Decode$string);
 var _user$project$Main$updateErrorMessage = _elm_lang$core$Native_Platform.incomingPort('updateErrorMessage', _elm_lang$core$Json_Decode$string);
 var _user$project$Main$Model = F6(
@@ -8749,7 +8750,11 @@ var _user$project$Main$subscriptions = function (model) {
 				_1: {
 					ctor: '::',
 					_0: _user$project$Main$updateErrorMessage(_user$project$Main$UpdateErrorMessage),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _user$project$Main$updatingMathEquationColor(_user$project$Main$UpdateMathEquation),
+						_1: {ctor: '[]'}
+					}
 				}
 			}
 		});
@@ -8811,7 +8816,7 @@ var _user$project$Main$view = function (model) {
 								_elm_lang$html$Html$input,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$id('selectInput'),
+									_0: _elm_lang$html$Html_Attributes$id('selectColor'),
 									_1: {
 										ctor: '::',
 										_0: _elm_lang$html$Html_Attributes$type_('color'),

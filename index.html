@@ -1,22 +1,18 @@
 <html>
     <head>
+        <meta charset="utf-8"/>
         <style>
             /* used to hide the mathjax logo
                 Its always hidden but has a length longer
                 then the container.  So i have to display
                 none everthing.
             */
+            
             #MathJax_SVG_Hidden{
                 display:none;
             }
             #MathJax_SVG_Hidden + svg{
                 display:none;
-            }
-            * {
-              font-family: Times;
-            }
-            h1{
-              line-height: 100%;
             }
             body {
               margin: 0;
@@ -78,7 +74,7 @@
             #logo{
                 position: absolute;
                 right: 5px;
-                top: 5px;
+                top: 10px;
                 height: 60px;
                 transform: rotate(355deg);
             }
@@ -124,10 +120,11 @@
             #SvgContainer{
               overflow:scroll;
             }
-            #selectInput{
+            #selectColor{
                 width:100%;
                 border-radius: 0px;
                 background: white;
+                box-sizing: border-box;
             }
         </style>
     </head>
@@ -247,7 +244,7 @@
             if(divSvg != null){
                 var svg = divSvg.getElementsByTagName("svg")[0];
                 var svgClone = svg.cloneNode(true);
-                svgClone.style.background = jsonElmRequest["mathEquationColor"]
+                svgClone.style.color = jsonElmRequest["mathEquationColor"]
                 var canvas = document.getElementById("myCanvas");
                 drawInlineSVG(svgClone, function(){
                     var image = canvas.toDataURL("image/png");
@@ -260,6 +257,13 @@
            google.script.run.withSuccessHandler(function(results){
                app.ports.updatingLinkedMathEquation.send(results.objectId)
                app.ports.updatingMathEquation.send(results.equation)
+               if(results.equationColor != undefined){
+                   app.ports.updatingMathEquationColor.send(results.mathEquationColor)
+               }
+               else{
+                   app.ports.updatingMathEquationColor.send("#000000")
+               }
+               
                
            }).withFailureHandler(error).getLinkedToImage();
         });
@@ -282,11 +286,11 @@
             var canvas = document.getElementById("myCanvas");
             var ratioSvg = svgElement.clientHeight/svgElement.clientWidth;
             var heigthSvg =  canvas.width * ratioSvg;
-            canvas.setAttribute("height", Math.round(heigthSvg) + "px") //look nicer with heightSvg + heightSvg *.2
+            canvas.height = heigthSvg; //look nicer with heightSvg + heightSvg *.2
             var img  = new Image();
             img.onload = function(){                      //width // height
-              canvas.getContext('2d').drawImage(this, 0,0, canvas.width, canvas.height);
-              callback();
+            canvas.getContext('2d').drawImage(this, 0,0, canvas.width, canvas.height);
+            callback();
             }
             img.src = 'data:image/svg+xml; charset=utf8, '+encodeURIComponent(svgURL);
         }

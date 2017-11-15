@@ -26,8 +26,10 @@ port reloadEquaion : String -> Cmd msg
 port updateEquaion : String -> Cmd msg
 port sumitEquation : String -> Cmd msg
 port updatingLinkedMathEquation : (String -> msg) -> Sub msg
+port updatingMathEquationColor : (String -> msg) -> Sub msg
 port updatingMathEquation : (String -> msg) -> Sub msg
 port updateErrorMessage : (String -> msg) -> Sub msg
+
 
 main =
   Html.program
@@ -174,7 +176,7 @@ view model =
           , viewOption MathML
           , viewOption AsciiMath
           ]
-        , input [id "selectInput", type_ "color", onInput UpdateMathEquation, value model.mathEquationColor, placeholder "select a color needs to be in #FFFFFF format"] []
+        , input [id "selectColor", type_ "color", onInput UpdateMathEquation, value model.mathEquationColor, placeholder "select a color needs to be in #FFFFFF format"] []
         , textarea [id "textAreaMathEquation", onInput UpdateEquaion, value model.mathEquation, placeholder "get changed"] [ ],
         div [] [
             button [id "submitMathEquation", onClick SumitEquation] [text "submit"] , 
@@ -271,6 +273,7 @@ subscriptions model =
       updatingLinkedMathEquation SetLinkedMathEquation
     , updatingMathEquation UpdateEquaion
     , updateErrorMessage UpdateErrorMessage
+    , updatingMathEquationColor UpdateMathEquation
   ]
   
 
