@@ -3,9 +3,7 @@ function setImage(jsonImageData){
   var imageProperties = getSpecificSavedProperties("imageProperties");
   var image = createImageFromBlob(jsonImageData["image"]);
   var slide = SlidesApp.getActivePresentation().getSelection().getCurrentPage();
-  Logger.log(slide)
   if(jsonImageData["linkedMathEquation"] != ""){
-    Logger.log("changing Image")
     var imageObjectId = jsonImageData["linkedMathEquation"];
     if( imageObjectId == undefined)
       throw "image does not exist";
@@ -25,7 +23,8 @@ function setImage(jsonImageData){
 
   
   imageProperties[imageSlide.getObjectId()] = {
-    "equation": jsonImageData["mathEquation"]
+    "equation": jsonImageData["mathEquation"],
+    "equationColor": jsonImageData["mathEquationColor"]
   }
   
   savePropertie("imageProperties", imageProperties)
@@ -65,13 +64,20 @@ function getLinkedToImage(){
   else if(pageElements.length >= 2)
     throw "can only select one item"
   var image = pageElements[0].asImage()
-  Logger.log(image.getObjectId())
   var imageObjectFromImageProperties = imageProperties[image.getObjectId()]
   if(imageObjectFromImageProperties == undefined)
     throw "not a equation"
+  var color = "#000000"
+
+  if (imageObjectFromImageProperties["equationColor"] != undefined &&
+      imageObjectFromImageProperties["equationColor"] != null){
+    color = imageObjectFromImageProperties["equationColor"];
+  }
+
   return {
       "objectId": image.getObjectId(),
-      "equation": imageObjectFromImageProperties["equation"]
+      "equation": imageObjectFromImageProperties["equation"],
+      "equationColor": color
   }
 }
 
