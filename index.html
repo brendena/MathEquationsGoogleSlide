@@ -6,12 +6,17 @@
                 then the container.  So i have to display
                 none everthing.
             */
-            
             #MathJax_SVG_Hidden{
                 display:none;
             }
             #MathJax_SVG_Hidden + svg{
                 display:none;
+            }
+            * {
+              font-family: Times;
+            }
+            h1{
+              line-height: 100%;
             }
             body {
               margin: 0;
@@ -73,7 +78,7 @@
             #logo{
                 position: absolute;
                 right: 5px;
-                top: 10px;
+                top: 5px;
                 height: 60px;
                 transform: rotate(355deg);
             }
@@ -277,11 +282,11 @@
             var canvas = document.getElementById("myCanvas");
             var ratioSvg = svgElement.clientHeight/svgElement.clientWidth;
             var heigthSvg =  canvas.width * ratioSvg;
-            canvas.height = heigthSvg; //look nicer with heightSvg + heightSvg *.2
+            canvas.setAttribute("height", Math.round(heigthSvg) + "px") //look nicer with heightSvg + heightSvg *.2
             var img  = new Image();
             img.onload = function(){                      //width // height
-            canvas.getContext('2d').drawImage(this, 0,0, canvas.width, canvas.height);
-            callback();
+              canvas.getContext('2d').drawImage(this, 0,0, canvas.width, canvas.height);
+              callback();
             }
             img.src = 'data:image/svg+xml; charset=utf8, '+encodeURIComponent(svgURL);
         }

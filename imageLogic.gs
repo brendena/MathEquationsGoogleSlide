@@ -53,10 +53,16 @@ function findImageSlide(imageObjectId){
 function getLinkedToImage(){ 
   var imageProperties = getSpecificSavedProperties("imageProperties");
   var selection = SlidesApp.getActivePresentation().getSelection();
-  var pageElements = selection.getPageElementRange().getPageElements();
+  var selectionRange = selection.getPageElementRange();
+ 
+  if(selectionRange == null)            
+    throw "you need to select a image to reload the equation back into the text box"    
+    
+  var pageElements = selectionRange.getPageElements();
+  
   if(pageElements.length <= 0)
     throw "please select a item"
-  else if(pageElements.length > 1)
+  else if(pageElements.length >= 2)
     throw "can only select one item"
   var image = pageElements[0].asImage()
   Logger.log(image.getObjectId())
