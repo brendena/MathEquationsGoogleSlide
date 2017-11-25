@@ -1,3 +1,14 @@
+<!-- 
+add this icon / maby it should just be a plus sign
+https://d30y9cdsu7xlg0.cloudfront.net/png/95705-200.png
+
+add the unlink icon
+
+should use the link icon
+
+
+maby i should add the size 
+-->
 <html>
     <head>
         <meta charset="utf-8"/>
@@ -71,11 +82,13 @@
               transition: 1s;
               border: solid black 1px;
             }
+            /*
             button:hover{
               background:#FFDE9E;
               border-bottom: 10px solid #BBEFC1;;
               padding-bottom: 0px;
             }
+            */
             #logo{
                 position: absolute;
                 right: 5px;
@@ -123,7 +136,7 @@
               padding: 10px;
             }
             #SvgContainer{
-              overflow:scroll;
+               overflow:hidden;
             }
             #selectColor{
                 width:100%;
@@ -223,7 +236,7 @@
               var divIdEquation = equationJson["mathType"] + "Equation";
               var divEquation = document.getElementById(divIdEquation)
               var math = MathJax.Hub.getAllJax(divIdEquation)[0];
-              divEquation.style.width = "1000px";
+              divEquation.style.width = "1500px";
               // page on live reloading
               // https://docs.mathjax.org/en/v1.0/typeset.html 
               if("MathML" == equationJson["mathType"]){
@@ -237,7 +250,10 @@
               }
               //this timeout allows MathJax to create the svg on a larger width then
               // convert it make to the width it could be
-              setTimeout(function(){divEquation.style.width = "inherit";  }, 30);
+              setTimeout(function(){
+                divEquation.style.width = "inherit";
+                divEquation.style.overflowX = "auto";
+                }, 100);
             },100);
             
 
@@ -291,9 +307,11 @@
         function drawInlineSVG(svgElement, callback){
             var svgURL = new XMLSerializer().serializeToString(svgElement);
             var canvas = document.getElementById("myCanvas");
-            var ratioSvg = svgElement.clientHeight/svgElement.clientWidth;
-            var heigthSvg =  canvas.width * ratioSvg;
-            canvas.setAttribute("height", Math.round(heigthSvg) + "px")//look nicer with heightSvg + heightSvg *.2
+            console.log();
+            var ratioSvg = svgElement.height.baseVal.valueInSpecifiedUnits/svgElement.width.baseVal.valueInSpecifiedUnits;
+            var heigthSvg =  canvas.width * ratioSvg
+            
+            canvas.height =  Math.round(heigthSvg)
             var img  = new Image();
             img.onload = function(){                      //width // height
               canvas.getContext('2d').drawImage(this, 0,0, canvas.width, canvas.height);
