@@ -57,7 +57,7 @@ main =
 
 init : ( Model, Cmd Msg )
 init =
-    ( Model Tex "" "" "" "#000000" False
+    ( Model Tex "" "" "" "#000000" True
     , Cmd.none
     )
 
@@ -222,7 +222,12 @@ view model =
                 , viewOption MathML
                 , viewOption AsciiMath
                 ]
-            , input [ id "selectColor", type_ "color", onInput UpdateMathEquation, value model.mathEquationColor, placeholder "select a color needs to be in #FFFFFF format" ] []
+            , div [ id "colorSelectContainer" ]
+                [ span []
+                    [ text ("") ]
+                , input [ id "selectColor", type_ "color", onInput UpdateMathEquation, value model.mathEquationColor, placeholder "select a color needs to be in #FFFFFF format" ] []
+                , img [ id "iconColorPalett", src iconColorPalette, classList [ ( "iconInButton", True ) ] ] []
+                ]
             , textarea [ id "textAreaMathEquation", onInput UpdateEquaion, value model.mathEquation, placeholder "Equation code placeholder" ] []
             , div []
                 [ button [ id "submitMathEquation", onClick SumitEquation ]
@@ -232,11 +237,11 @@ view model =
                 , --button [ onClick (SendToJs "testing")] [text "send Info"],
                   div [ id "reloadContainer" ]
                     [ button [ onClick ReloadEquaion ]
-                        [ span [] [ text ("reload") ]
+                        [ span [] [ text ("Load Equation") ]
                         , img [ src iconFullLink, classList [ ( "iconInButton", True ) ] ] []
                         ]
                     , button [ onClick (SetLinkedMathEquation ""), hidden (String.isEmpty model.linkedMathEquation) ]
-                        [ span [] [ text "unconnect" ]
+                        [ span [] [ text "Unconnect Equation" ]
                         , img [ src iconBrokenLink, classList [ ( "iconInButton", True ) ] ] []
                         ]
                     ]
@@ -299,6 +304,29 @@ helpPage model =
                 )
             ]
         , img [ id "logo", src "" ] []
+        , h3 [] [ text ("UI Elements") ]
+        , div []
+            [ div []
+                [ img [ src iconCopy, classList [ ( "iconInButton", True ) ] ] []
+                , span [] [ text ("Copy to clipboard") ]
+                , p [] [ text ("Takes the equation's image and loads it into the current slide") ]
+                ]
+            , div []
+                [ img [ src iconColorPalette, classList [ ( "iconInButton", True ) ] ] []
+                , span [] [ text ("Color Equation") ]
+                , p [] [ text ("Next to the color pallet will be a box with a color.  Click this to edit what color is used for the equation.  Only on submission will this color actually visible.  This is to make the equation most visible on white background.") ]
+                ]
+            , div []
+                [ img [ src iconFullLink, classList [ ( "iconInButton", True ) ] ] []
+                , span [] [ text ("Edit old equation") ]
+                , p [] [ text ("To edit a equation that's in image form you must first load the equation text into the text area.  To do this click the image in the slide and click the 'Load Equation' button.  This will load the equation and link it to the extension.  Now every time you 'add image to slide' this will update the equation.  To stop updating a equation you must hit the the 'Unconnect Equation' button. ") ]
+                ]
+            , div []
+                [ img [ src iconBrokenLink, classList [ ( "iconInButton", True ) ] ] []
+                , span [] [ text ("Unconnected equation") ]
+                , p [] [ text ("If the equation is connected you should see the 'Unconnected equation' button.  This disconnected the current editing image and will allow you to create a new image. ") ]
+                ]
+            ]
         ]
 
 
@@ -364,6 +392,11 @@ iconHelp =
 iconCopy : String
 iconCopy =
     "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDEwMDAgMTAwMCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMTAwMCAxMDAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48bWV0YWRhdGE+IFN2ZyBWZWN0b3IgSWNvbnMgOiBodHRwOi8vd3d3Lm9ubGluZXdlYmZvbnRzLmNvbS9pY29uIDwvbWV0YWRhdGE+PGc+PHBhdGggZD0iTTY5MSwxNjAuOFYxMEgyNjkuNUMyMDYuMyw3Mi42LDE0My4xLDEzNS4yLDgwLDE5Ny44djY0MS40aDIyNy45Vjk5MEg5MjBWMTYwLjhINjkxeiBNMjY5LjUsNjQuNHYxMzQuNEgxMzMuMUMxNzguNSwxNTQsMjI0LDEwOS4yLDI2OS41LDY0LjR6IE0zMDcuOSw4MDEuMkgxMTcuNVYyMzYuOGgxOTAuNVY0Ny45aDM0NC41djExMi45aC0xNTRjLTYzLjUsNjIuOS0xMjcsMTI1LjktMTkwLjUsMTg4LjhWODAxLjJ6IE00OTkuNSwyMTUuMnYxMzQuNUgzNjMuMXYtMWM0NS4xLTQ0LjUsOTAuMi04OSwxMzUuMy0xMzMuNUw0OTkuNSwyMTUuMnogTTg4MS41LDk1MmgtNTM1VjM4Ni42SDUzOFYxOTguOGgzNDMuNVY5NTJ6Ii8+PC9nPjwvc3ZnPg=="
+
+
+iconColorPalette : String
+iconColorPalette =
+    "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iNDU5cHgiIGhlaWdodD0iNDU5cHgiIHZpZXdCb3g9IjAgMCA0NTkgNDU5IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0NTkgNDU5OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PGc+PGcgaWQ9InBhbGV0dGUiPjxwYXRoIGQ9Ik0yMjkuNSwwQzEwMiwwLDAsMTAyLDAsMjI5LjVTMTAyLDQ1OSwyMjkuNSw0NTljMjAuNCwwLDM4LjI1LTE3Ljg1LDM4LjI1LTM4LjI1YzAtMTAuMi0yLjU1LTE3Ljg1LTEwLjItMjUuNWMtNS4xLTcuNjUtMTAuMi0xNS4zLTEwLjItMjUuNWMwLTIwLjQsMTcuODUxLTM4LjI1LDM4LjI1LTM4LjI1aDQ1LjljNzEuNCwwLDEyNy41LTU2LjEsMTI3LjUtMTI3LjVDNDU5LDkxLjgsMzU3LDAsMjI5LjUsMHogTTg5LjI1LDIyOS41Yy0yMC40LDAtMzguMjUtMTcuODUtMzguMjUtMzguMjVTNjguODUsMTUzLDg5LjI1LDE1M3MzOC4yNSwxNy44NSwzOC4yNSwzOC4yNVMxMDkuNjUsMjI5LjUsODkuMjUsMjI5LjV6IE0xNjUuNzUsMTI3LjVjLTIwLjQsMC0zOC4yNS0xNy44NS0zOC4yNS0zOC4yNVMxNDUuMzUsNTEsMTY1Ljc1LDUxUzIwNCw2OC44NSwyMDQsODkuMjVTMTg2LjE1LDEyNy41LDE2NS43NSwxMjcuNXogTTI5My4yNSwxMjcuNWMtMjAuNCwwLTM4LjI1LTE3Ljg1LTM4LjI1LTM4LjI1UzI3Mi44NSw1MSwyOTMuMjUsNTFzMzguMjUsMTcuODUsMzguMjUsMzguMjVTMzEzLjY1LDEyNy41LDI5My4yNSwxMjcuNXogTTM2OS43NSwyMjkuNWMtMjAuNCwwLTM4LjI1LTE3Ljg1LTM4LjI1LTM4LjI1UzM0OS4zNSwxNTMsMzY5Ljc1LDE1M1M0MDgsMTcwLjg1LDQwOCwxOTEuMjVTMzkwLjE1LDIyOS41LDM2OS43NSwyMjkuNXoiLz48L2c+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjwvc3ZnPg=="
 
 
 logoIconSrc : String

@@ -5,6 +5,11 @@ I need to make it look nice.
 
 I also want to have the help page descrive each help icon
 
+
+I want to change the footer been to link color 
+
+
+Then i'll have to reupload the images to google slides
 -->
 <html>
     <head>
@@ -94,8 +99,8 @@ I also want to have the help page descrive each help icon
             }
             #helpPage{
                 position: fixed;
-                width: 96vw;
-                height: 96vh;
+                width: 100vw;
+                height: 100vh;
                 z-index: 2;
                 background: #FFDE9E;
                 top: 0;
@@ -103,6 +108,7 @@ I also want to have the help page descrive each help icon
                 border: 2vw solid black;
                 overflow:auto;
                 transform: "translateX(100%)";
+                box-sizing: border-box;
                 will-change: transform;
             }
             #siteMainContent{
@@ -136,7 +142,7 @@ I also want to have the help page descrive each help icon
                overflow:hidden;
             }
             #selectColor{
-                width:100%;
+                flex:1;
                 border-radius: 0px;
                 background: white;
                 box-sizing: border-box;
@@ -144,6 +150,16 @@ I also want to have the help page descrive each help icon
             .iconInButton{
                 height:15px;
                 padding-left:5px;
+            }
+            footer{
+                background: #ffffb8;
+            }
+            #colorSelectContainer{
+                display:flex;
+                height:20px;
+            }
+            #iconColorPalett{
+                height:100%;
             }
         </style>
     </head>

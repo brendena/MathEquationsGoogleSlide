@@ -8261,6 +8261,7 @@ var _elm_lang$html$Html_Events$Options = F2(
 	});
 
 var _user$project$Main$logoIconSrc = 'https://github.com/brendena/MathEquationsGoogleSlide/blob/master/image/logoSquare64by64.png?raw=true';
+var _user$project$Main$iconColorPalette = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iNDU5cHgiIGhlaWdodD0iNDU5cHgiIHZpZXdCb3g9IjAgMCA0NTkgNDU5IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0NTkgNDU5OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PGc+PGcgaWQ9InBhbGV0dGUiPjxwYXRoIGQ9Ik0yMjkuNSwwQzEwMiwwLDAsMTAyLDAsMjI5LjVTMTAyLDQ1OSwyMjkuNSw0NTljMjAuNCwwLDM4LjI1LTE3Ljg1LDM4LjI1LTM4LjI1YzAtMTAuMi0yLjU1LTE3Ljg1LTEwLjItMjUuNWMtNS4xLTcuNjUtMTAuMi0xNS4zLTEwLjItMjUuNWMwLTIwLjQsMTcuODUxLTM4LjI1LDM4LjI1LTM4LjI1aDQ1LjljNzEuNCwwLDEyNy41LTU2LjEsMTI3LjUtMTI3LjVDNDU5LDkxLjgsMzU3LDAsMjI5LjUsMHogTTg5LjI1LDIyOS41Yy0yMC40LDAtMzguMjUtMTcuODUtMzguMjUtMzguMjVTNjguODUsMTUzLDg5LjI1LDE1M3MzOC4yNSwxNy44NSwzOC4yNSwzOC4yNVMxMDkuNjUsMjI5LjUsODkuMjUsMjI5LjV6IE0xNjUuNzUsMTI3LjVjLTIwLjQsMC0zOC4yNS0xNy44NS0zOC4yNS0zOC4yNVMxNDUuMzUsNTEsMTY1Ljc1LDUxUzIwNCw2OC44NSwyMDQsODkuMjVTMTg2LjE1LDEyNy41LDE2NS43NSwxMjcuNXogTTI5My4yNSwxMjcuNWMtMjAuNCwwLTM4LjI1LTE3Ljg1LTM4LjI1LTM4LjI1UzI3Mi44NSw1MSwyOTMuMjUsNTFzMzguMjUsMTcuODUsMzguMjUsMzguMjVTMzEzLjY1LDEyNy41LDI5My4yNSwxMjcuNXogTTM2OS43NSwyMjkuNWMtMjAuNCwwLTM4LjI1LTE3Ljg1LTM4LjI1LTM4LjI1UzM0OS4zNSwxNTMsMzY5Ljc1LDE1M1M0MDgsMTcwLjg1LDQwOCwxOTEuMjVTMzkwLjE1LDIyOS41LDM2OS43NSwyMjkuNXoiLz48L2c+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjwvc3ZnPg==';
 var _user$project$Main$iconCopy = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDEwMDAgMTAwMCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMTAwMCAxMDAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48bWV0YWRhdGE+IFN2ZyBWZWN0b3IgSWNvbnMgOiBodHRwOi8vd3d3Lm9ubGluZXdlYmZvbnRzLmNvbS9pY29uIDwvbWV0YWRhdGE+PGc+PHBhdGggZD0iTTY5MSwxNjAuOFYxMEgyNjkuNUMyMDYuMyw3Mi42LDE0My4xLDEzNS4yLDgwLDE5Ny44djY0MS40aDIyNy45Vjk5MEg5MjBWMTYwLjhINjkxeiBNMjY5LjUsNjQuNHYxMzQuNEgxMzMuMUMxNzguNSwxNTQsMjI0LDEwOS4yLDI2OS41LDY0LjR6IE0zMDcuOSw4MDEuMkgxMTcuNVYyMzYuOGgxOTAuNVY0Ny45aDM0NC41djExMi45aC0xNTRjLTYzLjUsNjIuOS0xMjcsMTI1LjktMTkwLjUsMTg4LjhWODAxLjJ6IE00OTkuNSwyMTUuMnYxMzQuNUgzNjMuMXYtMWM0NS4xLTQ0LjUsOTAuMi04OSwxMzUuMy0xMzMuNUw0OTkuNSwyMTUuMnogTTg4MS41LDk1MmgtNTM1VjM4Ni42SDUzOFYxOTguOGgzNDMuNVY5NTJ6Ii8+PC9nPjwvc3ZnPg==';
 var _user$project$Main$iconHelp = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBTdmcgVmVjdG9yIEljb25zIDogaHR0cDovL3d3dy5vbmxpbmV3ZWJmb250cy5jb20vaWNvbiAtLT4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyBvbmNsaWNrPSJ0b2dnbGVIZWxwUGFnZSgpIiBpZD0iaGVscEljb24iIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAxMDAwIDEwMDAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDEwMDAgMTAwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxtZXRhZGF0YT4gU3ZnIFZlY3RvciBJY29ucyA6IGh0dHA6Ly93d3cub25saW5ld2ViZm9udHMuY29tL2ljb24gPC9tZXRhZGF0YT4KPGc+PHBhdGggZD0iTTUwMC4xLDkuOUMyMjkuNCw5LjksMTAsMjI5LjEsMTAsNDk5LjhjMCwyNzAuNywyMTkuNCw0OTAuMyw0OTAuMSw0OTAuM1M5OTAsNzcwLjUsOTkwLDQ5OS44Qzk5MCwyMjkuMSw3NzAuNyw5LjksNTAwLjEsOS45eiBNNTAwLjMsODc5LjJjLTIwOS41LDAtMzc5LjYtMTY5LjktMzc5LjYtMzc5LjVjMC0yMDkuNCwxNzAtMzc5LDM3OS42LTM3OWMyMDkuMiwwLDM3OSwxNjkuNiwzNzksMzc5Qzg3OS4yLDcwOS40LDcwOS41LDg3OS4yLDUwMC4zLDg3OS4yeiIvPjxwYXRoIGQ9Ik00NTcuNyw2NDUuNWg5M3YtNzIuN2MwLTE5LjYsOS4yLTM4LDMzLjgtNTQuMmMyNC4zLTE2LjEsOTIuNy00OC42LDkyLjctMTM0LjFjMC04NS43LTcxLjgtMTQ0LjctMTMyLTE1Ny4yYy02MC41LTEyLjUtMTI1LjktNC4zLTE3Mi4xLDQ2LjVjLTQxLjYsNDUuMy01MC4zLDgxLjUtNTAuMywxNjAuOWg5M3YtMTguNmMwLTQyLjEsNC45LTg2LjksNjUuNC05OS4xYzMzLTYuNyw2NCwzLjgsODIuMywyMS42YzIxLjEsMjAuNiwyMS4xLDY2LjctMTIuMyw4OS45bC01Mi41LDM1LjVjLTMwLjYsMTkuOC00MC45LDQxLjYtNDAuOSw3My43VjY0NS41TDQ1Ny43LDY0NS41eiIvPjxwYXRoIGQ9Ik01MDQuMyw2ODEuOWMyNi4zLDAsNDcuOCwyMS40LDQ3LjgsNDcuOWMwLDI2LjUtMjEuNSw0Ny44LTQ3LjgsNDcuOGMtMjYuNiwwLTQ4LjMtMjEuNC00OC4zLTQ3LjhDNDU2LjEsNzAzLjMsNDc3LjcsNjgxLjksNTA0LjMsNjgxLjl6Ii8+PC9nPgo8L3N2Zz4=';
 var _user$project$Main$iconBrokenLink = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/PjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDIxLjgzNCAyMS44MzQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDIxLjgzNCAyMS44MzQ7IiB4bWw6c3BhY2U9InByZXNlcnZlIj48Zz48cGF0aCBzdHlsZT0iZmlsbDojMDkwNjA5OyIgZD0iTTE0LjY3NCwzLjcxNWgwLjM1N3YzLjIwMmgtMC4zNTdWMy43MTV6IE0xNS4wMzEsNy40NTNoMy4yMDF2MC4zNThoLTMuMjAxVjcuNDUzeiBNNy4zLDE1Ljg4N2gwLjM1N3YzLjIwMUg3LjNWMTUuODg3eiBNNC4wOTgsMTQuOTkzSDcuM3YwLjM1OEg0LjA5OFYxNC45OTN6IE04LjY1MSwxMS45MTNsLTUuNzctNS43NjljLTAuODY5LTAuODY5LTAuODY3LTIuMjgxLDAtMy4xNDljMC4wMTQtMC4wMTMsMC4wMzktMC4wNCwwLjAzOS0wLjA0czAuMDUzLTAuMDUsMC4wNzgtMC4wNzZDMy44NjUsMi4wMTIsNS4yNzYsMi4wMTIsNi4xNDQsMi44OGw2LjAwMSw2LjAwMWwtMC4wMDIsMC4wMDJjMCwwLDAuMDQsMC4wMzksMC4xMTgsMC4xMTdsMC4yODEtMC44OTZsMC45MjQtMC4xNzRsMC4wMzctMC44NDRMNy43MiwxLjMwNWMtMS43MzktMS43MzktNC41Ni0xLjc0LTYuMjk4LTAuMDAyYy0wLjAxOCwwLjAxOC0wLjA0MSwwLjA0LTAuMDU4LDAuMDU5QzEuMzQyLDEuMzgxLDEuMzI3LDEuMzk4LDEuMzA2LDEuNDE5Yy0xLjc0LDEuNzM5LTEuNzQsNC41NTksMCw2LjI5OUw3LjEsMTMuNTEyYzAuMDcyLDAuMDcyLDAuMTMsMC4xMzIsMC4xNzksMC4xOGwtMC4wMDEsMC4wMDFsMC4xMzcsMC4xMzhsMC4yNzMtMC44NzNsMC45MjQtMC4xNzVMOC42NTEsMTEuOTEzeiBNMjAuNTI4LDE0LjExNWwtNS43NjItNS43NTlsLTAuMDMyLDAuNzY5TDEzLjcwMSw5LjMybC0wLjI2NywwLjg1Mmw1LjUyLDUuNTJjMC44NjcsMC44NjgsMC44NjUsMi4yNzktMC4wMDEsMy4xNDdjLTAuMDE1LDAuMDEzLTAuMDM5LDAuMDQtMC4wMzksMC4wNHMtMC4wNTMsMC4wNTEtMC4wNzgsMC4wNzdjLTAuODY2LDAuODY2LTIuMjc4LDAuODY2LTMuMTQ2LTAuMDAybC01Ljc3My01Ljc3M2wtMC4wMzUsMC43OTdsLTEuMDMzLDAuMTk1bC0wLjI2LDAuODMxbDUuNTI2LDUuNTI1YzEuNzM5LDEuNzM5LDQuNTYsMS43NDEsNi4yOTgsMC4wMDNjMC4wMTktMC4wMiwwLjA0MS0wLjA0MSwwLjA1OS0wLjA2MWMwLjAyMS0wLjAxOSwwLjAzNi0wLjAzNiwwLjA1OC0wLjA1N0MyMi4yNjgsMTguNjc2LDIyLjI2OCwxNS44NTYsMjAuNTI4LDE0LjExNXoiLz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PC9zdmc+';
@@ -8446,7 +8447,7 @@ var _user$project$Main$Model = F6(
 var _user$project$Main$Tex = {ctor: 'Tex'};
 var _user$project$Main$init = {
 	ctor: '_Tuple2',
-	_0: A6(_user$project$Main$Model, _user$project$Main$Tex, '', '', '', '#000000', false),
+	_0: A6(_user$project$Main$Model, _user$project$Main$Tex, '', '', '', '#000000', true),
 	_1: _elm_lang$core$Platform_Cmd$none
 };
 var _user$project$Main$AsciiMath = {ctor: 'AsciiMath'};
@@ -8669,7 +8670,221 @@ var _user$project$Main$helpPage = function (model) {
 										}
 									},
 									{ctor: '[]'}),
-								_1: {ctor: '[]'}
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$h3,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('UI Elements'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$div,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$img,
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$src(_user$project$Main$iconCopy),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$classList(
+																		{
+																			ctor: '::',
+																			_0: {ctor: '_Tuple2', _0: 'iconInButton', _1: true},
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {ctor: '[]'}
+																}
+															},
+															{ctor: '[]'}),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$span,
+																{ctor: '[]'},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('Copy to clipboard'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$p,
+																	{ctor: '[]'},
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text('Takes the equation\'s image and loads it into the current slide'),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {ctor: '[]'}
+															}
+														}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$div,
+														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$img,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$src(_user$project$Main$iconColorPalette),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$classList(
+																			{
+																				ctor: '::',
+																				_0: {ctor: '_Tuple2', _0: 'iconInButton', _1: true},
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {ctor: '[]'}
+																	}
+																},
+																{ctor: '[]'}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$span,
+																	{ctor: '[]'},
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text('Color Equation'),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$p,
+																		{ctor: '[]'},
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text('Next to the color pallet will be a box with a color.  Click this to edit what color is used for the equation.  Only on submission will this color actually visible.  This is to make the equation most visible on white background.'),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$div,
+															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$img,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$src(_user$project$Main$iconFullLink),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$classList(
+																				{
+																					ctor: '::',
+																					_0: {ctor: '_Tuple2', _0: 'iconInButton', _1: true},
+																					_1: {ctor: '[]'}
+																				}),
+																			_1: {ctor: '[]'}
+																		}
+																	},
+																	{ctor: '[]'}),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$span,
+																		{ctor: '[]'},
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text('Edit old equation'),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$p,
+																			{ctor: '[]'},
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html$text('To edit a equation that\'s in image form you must first load the equation text into the text area.  To do this click the image in the slide and click the \'Load Equation\' button.  This will load the equation and link it to the extension.  Now every time you \'add image to slide\' this will update the equation.  To stop updating a equation you must hit the the \'Unconnect Equation\' button. '),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$div,
+																{ctor: '[]'},
+																{
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$img,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$src(_user$project$Main$iconBrokenLink),
+																			_1: {
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$classList(
+																					{
+																						ctor: '::',
+																						_0: {ctor: '_Tuple2', _0: 'iconInButton', _1: true},
+																						_1: {ctor: '[]'}
+																					}),
+																				_1: {ctor: '[]'}
+																			}
+																		},
+																		{ctor: '[]'}),
+																	_1: {
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$span,
+																			{ctor: '[]'},
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html$text('Unconnected equation'),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {
+																			ctor: '::',
+																			_0: A2(
+																				_elm_lang$html$Html$p,
+																				{ctor: '[]'},
+																				{
+																					ctor: '::',
+																					_0: _elm_lang$html$Html$text('If the equation is connected you should see the \'Unconnected equation\' button.  This disconnected the current editing image and will allow you to create a new image. '),
+																					_1: {ctor: '[]'}
+																				}),
+																			_1: {ctor: '[]'}
+																		}
+																	}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}
 							}
 						}
 					}
@@ -8818,29 +9033,75 @@ var _user$project$Main$view = function (model) {
 						_1: {
 							ctor: '::',
 							_0: A2(
-								_elm_lang$html$Html$input,
+								_elm_lang$html$Html$div,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$id('selectColor'),
+									_0: _elm_lang$html$Html_Attributes$id('colorSelectContainer'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$span,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(''),
+											_1: {ctor: '[]'}
+										}),
 									_1: {
 										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$type_('color'),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$UpdateMathEquation),
-											_1: {
+										_0: A2(
+											_elm_lang$html$Html$input,
+											{
 												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$value(model.mathEquationColor),
+												_0: _elm_lang$html$Html_Attributes$id('selectColor'),
 												_1: {
 													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$placeholder('select a color needs to be in #FFFFFF format'),
-													_1: {ctor: '[]'}
+													_0: _elm_lang$html$Html_Attributes$type_('color'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$UpdateMathEquation),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$value(model.mathEquationColor),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$placeholder('select a color needs to be in #FFFFFF format'),
+																_1: {ctor: '[]'}
+															}
+														}
+													}
 												}
-											}
+											},
+											{ctor: '[]'}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$img,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$id('iconColorPalett'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$src(_user$project$Main$iconColorPalette),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$classList(
+																{
+																	ctor: '::',
+																	_0: {ctor: '_Tuple2', _0: 'iconInButton', _1: true},
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}
+												},
+												{ctor: '[]'}),
+											_1: {ctor: '[]'}
 										}
 									}
-								},
-								{ctor: '[]'}),
+								}),
 							_1: {
 								ctor: '::',
 								_0: A2(
@@ -8938,7 +9199,7 @@ var _user$project$Main$view = function (model) {
 																	{ctor: '[]'},
 																	{
 																		ctor: '::',
-																		_0: _elm_lang$html$Html$text('reload'),
+																		_0: _elm_lang$html$Html$text('Load Equation'),
 																		_1: {ctor: '[]'}
 																	}),
 																_1: {
@@ -8985,7 +9246,7 @@ var _user$project$Main$view = function (model) {
 																		{ctor: '[]'},
 																		{
 																			ctor: '::',
-																			_0: _elm_lang$html$Html$text('unconnect'),
+																			_0: _elm_lang$html$Html$text('Unconnect Equation'),
 																			_1: {ctor: '[]'}
 																		}),
 																	_1: {
