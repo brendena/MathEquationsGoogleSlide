@@ -44,6 +44,7 @@ maby i should add the size
                 border-bottom: solid;
                 padding-bottom: .5em;
                 margin-bottom: 1em;
+                background: #c1c5c6;
             }
             header > h1{
               padding-left: 10%;
@@ -54,6 +55,8 @@ maby i should add the size
               background: #FFFF9E;
               color: black;
               font-size: 1em;
+              border:none;
+              border-bottom: 1px solid black;
             }
             #textAreaMathEquation{
                 height: 100px;
@@ -76,25 +79,21 @@ maby i should add the size
               padding: 10px;
               background: #FFFF9E;
               color: black;
-              border: 0px;
-              border-bottom: 0px solid rgb(255, 255, 255);
               font-size: 1em;
-              transition: 1s;
-              border: solid black 1px;
+              transition: .5s;
+              border: none;
+              border-bottom: 1px solid black;
             }
-            /*
+            
             button:hover{
-              background:#FFDE9E;
-              border-bottom: 10px solid #BBEFC1;;
-              padding-bottom: 0px;
+              background:#fff4d6;
             }
-            */
+            
             #logo{
                 position: absolute;
-                right: 5px;
-                top: 10px;
+                right: 0px;
+                top: 0px;
                 height: 60px;
-                transform: rotate(355deg);
             }
             #helpPage{
                 position: fixed;
@@ -103,10 +102,11 @@ maby i should add the size
                 z-index: 2;
                 background: #FFDE9E;
                 top: 0;
-                transform: scale(1,0);
                 transition: 1s;
                 border: 2vw solid black;
                 overflow:auto;
+                transform: "translateX(100%)";
+                will-change: transform;
             }
             #siteMainContent{
                 flex: 1;
@@ -144,13 +144,17 @@ maby i should add the size
                 background: white;
                 box-sizing: border-box;
             }
+            .iconInButton{
+                height:15px;
+                padding-left:5px;
+            }
         </style>
     </head>
     <body>
     <div id="main"></div>
     <canvas id="myCanvas" width="800px" style="display:none">
     
-    <?!= include('SelectInput'); ?>
+    <script src="SelectInput.js"></script>
        
      <!--
 
