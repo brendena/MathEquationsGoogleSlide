@@ -57,7 +57,7 @@ main =
 
 init : ( Model, Cmd Msg )
 init =
-    ( Model Tex "" "" "" "#000000" True
+    ( Model Tex "" "" "" "#000000" False
     , Cmd.none
     )
 
@@ -237,11 +237,11 @@ view model =
                 , --button [ onClick (SendToJs "testing")] [text "send Info"],
                   div [ id "reloadContainer" ]
                     [ button [ onClick ReloadEquaion ]
-                        [ span [] [ text ("Load Equation") ]
+                        [ span [] [ text ("load Equation") ]
                         , img [ src iconFullLink, classList [ ( "iconInButton", True ) ] ] []
                         ]
                     , button [ onClick (SetLinkedMathEquation ""), hidden (String.isEmpty model.linkedMathEquation) ]
-                        [ span [] [ text "Unconnect Equation" ]
+                        [ span [] [ text "unconnect Equation" ]
                         , img [ src iconBrokenLink, classList [ ( "iconInButton", True ) ] ] []
                         ]
                     ]
@@ -289,7 +289,8 @@ helpPage model =
     div [ id "helpPage", helpPageStyles model.helpPageOpen ]
         [ h2 [] [ text "Help Page", span [ id "exitIcon", onClick (ToggleHelpPage False) ] [ text " X" ] ]
         , h3 [] [ text "Create an Equation" ]
-        , p []
+        , img [ id "logo", src logoIconSrc ] []
+        , p [ classList [ ( "indentText", True ) ] ]
             [ text
                 ("To create an image out of your equation you must first select the type of format your math equation is in.  Then type your equation inside the "
                     ++ "text box.  Right underneath the text box will be a example of the output.  Once you are done hit the submit button and it will create a image of the "
@@ -297,34 +298,33 @@ helpPage model =
                 )
             ]
         , h3 [] [ text "Updating Equation" ]
-        , p []
+        , p [ classList [ ( "indentText", True ) ] ]
             [ text
                 ("To update an image select the image you want and hit the reload icon.  This will bind the image to the extension and whenever you hit the"
                     ++ " button it will update the image.  To stop updating a image hit the unconnect button."
                 )
             ]
-        , img [ id "logo", src "" ] []
         , h3 [] [ text ("UI Elements") ]
         , div []
             [ div []
                 [ img [ src iconCopy, classList [ ( "iconInButton", True ) ] ] []
                 , span [] [ text ("Copy to clipboard") ]
-                , p [] [ text ("Takes the equation's image and loads it into the current slide") ]
+                , p [ classList [ ( "indentText", True ) ] ] [ text ("Takes the equation's image and loads it into the current slide") ]
                 ]
             , div []
                 [ img [ src iconColorPalette, classList [ ( "iconInButton", True ) ] ] []
                 , span [] [ text ("Color Equation") ]
-                , p [] [ text ("Next to the color pallet will be a box with a color.  Click this to edit what color is used for the equation.  Only on submission will this color actually visible.  This is to make the equation most visible on white background.") ]
+                , p [ classList [ ( "indentText", True ) ] ] [ text ("Next to the color pallet will be a box with a color.  Click this to edit what color is used for the equation.  Only on submission will this color actually visible.  This is to make the equation most visible on white background.") ]
                 ]
             , div []
                 [ img [ src iconFullLink, classList [ ( "iconInButton", True ) ] ] []
                 , span [] [ text ("Edit old equation") ]
-                , p [] [ text ("To edit a equation that's in image form you must first load the equation text into the text area.  To do this click the image in the slide and click the 'Load Equation' button.  This will load the equation and link it to the extension.  Now every time you 'add image to slide' this will update the equation.  To stop updating a equation you must hit the the 'Unconnect Equation' button. ") ]
+                , p [ classList [ ( "indentText", True ) ] ] [ text ("To edit a equation that's in image form you must first load the equation text into the text area.  To do this click the image in the slide and click the 'Load Equation' button.  This will load the equation and link it to the extension.  Now every time you 'add image to slide' this will update the equation.  To stop updating a equation you must hit the the 'Unconnect Equation' button. ") ]
                 ]
             , div []
                 [ img [ src iconBrokenLink, classList [ ( "iconInButton", True ) ] ] []
                 , span [] [ text ("Unconnected equation") ]
-                , p [] [ text ("If the equation is connected you should see the 'Unconnected equation' button.  This disconnected the current editing image and will allow you to create a new image. ") ]
+                , p [ classList [ ( "indentText", True ) ] ] [ text ("If the equation is connected you should see the 'Unconnected equation' button.  This disconnected the current editing image and will allow you to create a new image. ") ]
                 ]
             ]
         ]
@@ -401,4 +401,4 @@ iconColorPalette =
 
 logoIconSrc : String
 logoIconSrc =
-    "https://github.com/brendena/MathEquationsGoogleSlide/blob/master/image/logoSquare64by64.png?raw=true"
+    "https://github.com/brendena/MathEquationsGoogleSlide/blob/master/image/logoNoBackground64by64.png?raw=true"
