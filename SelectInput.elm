@@ -237,11 +237,11 @@ view model =
                 , --button [ onClick (SendToJs "testing")] [text "send Info"],
                   div [ id "reloadContainer" ]
                     [ button [ onClick ReloadEquaion ]
-                        [ span [] [ text ("load Equation") ]
+                        [ span [] [ text ("Connect to Equation") ]
                         , img [ src iconFullLink, classList [ ( "iconInButton", True ) ] ] []
                         ]
                     , button [ onClick (SetLinkedMathEquation ""), hidden (String.isEmpty model.linkedMathEquation) ]
-                        [ span [] [ text "unconnect Equation" ]
+                        [ span [] [ text "Disconnect from Equation" ]
                         , img [ src iconBrokenLink, classList [ ( "iconInButton", True ) ] ] []
                         ]
                     ]
