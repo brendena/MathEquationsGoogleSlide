@@ -29,9 +29,14 @@ function onOpen() {
 
 function showSidebar() {
   
-  var html = doGet().setTitle('Math Equations UI').setWidth(300);
+  var html = doGet().setTitle('Math Solver').setWidth(300);
   SlidesApp.getUi() // Or DocumentApp or FormApp.
       .showSidebar(html);
+  
+   //everTime you open the slide show it will look
+   //through all images and delete the saved data
+   //on images that have been manually deleted
+   deleteDeletedEquations()
 }
 
 function onInstall(){

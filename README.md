@@ -8,7 +8,7 @@
  * AsciiMath
  * MathML
 
-![Example UI Layout](https://github.com/brendena/MathEquationsGoogleSlide/blob/master/image/StoreExample2.png?raw=true)
+![Example UI Layout](https://github.com/brendena/MathEquationsGoogleSlide/blob/master/image/Example.png?raw=true)
 
 ## How it works
 
