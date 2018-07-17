@@ -191,7 +191,8 @@ Then i'll have to reupload the images to google slides
     <div id="main"></div>
     <canvas id="myCanvas" width="800px" style="display:none">
     
-        <script src="SelectInput.js"></script>
+        
+        <?!= include('SelectInput'); ?>
        
      <!--
 
@@ -310,9 +311,13 @@ Then i'll have to reupload the images to google slides
                 var canvas = document.getElementById("myCanvas");
                 drawInlineSVG(svgClone, function(){
                     var image = canvas.toDataURL("image/png");
-                    jsonElmRequest["image"] = image.split("base64,")[1]
-                    console.log(jsonElmRequest);
+                    jsonElmRequest["image"] = image.split("base64,")[1];
+
+                    //jsonElmRequest["ratioImage"] = image.
+                    
+                    jsonElmRequest["ratio"]  = canvas.height/canvas.width;
                     //create image and add them to the slideshow
+                    console.log(jsonElmRequest);
                     google.script.run.withSuccessHandler(
                       function(ObjectId){
                         //once the image is added to the slideshow add alt text
