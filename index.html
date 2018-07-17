@@ -170,13 +170,28 @@ Then i'll have to reupload the images to google slides
             a:vistited{
                 color:  #b000ff
             }
+
+            #sizeSelectContainer{
+                display:flex;
+                padding-top: 10px;
+            }
+
+            .iconSizeButton{
+                flex:1;
+            }
+
+            .iconSizeButtonSelected{
+               background:#fdfffb;
+               /*background: linear-gradient(to bottom, #fdfffb 95%,#ffff9e 100%);*/ 
+            }
+
         </style>
     </head>
     <body>
     <div id="main"></div>
     <canvas id="myCanvas" width="800px" style="display:none">
     
-        <?!= include('SelectInput'); ?>
+        <script src="SelectInput.js"></script>
        
      <!--
 

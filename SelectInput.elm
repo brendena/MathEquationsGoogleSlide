@@ -57,7 +57,7 @@ main =
 
 init : ( Model, Cmd Msg )
 init =
-    ( Model Tex "" "" "" "#000000" False
+    ( Model Tex "" "" "" "#000000" False SizeMedium
     , Cmd.none
     )
 
@@ -73,6 +73,7 @@ type alias Model =
     , errorMessage : String
     , mathEquationColor : String
     , helpPageOpen : Bool
+    , sizeEquation : SizeEquation
     }
 
 
@@ -80,6 +81,11 @@ type MathType
     = MathML
     | AsciiMath
     | Tex
+
+type SizeEquation
+    = SizeSmall
+    | SizeMedium
+    | SizeLarge
 
 
 encodeModel : Model -> Value
@@ -89,6 +95,7 @@ encodeModel model =
         , ( "linkedMathEquation", Json.Encode.string model.linkedMathEquation )
         , ( "mathEquation", Json.Encode.string model.mathEquation )
         , ( "mathEquationColor", Json.Encode.string model.mathEquationColor )
+        , ( "mathEquationSize", Json.Encode.string (toSizeEquation model.sizeEquation ) ) 
         ]
 
 
@@ -119,6 +126,18 @@ toOptionString currency =
 
         Tex ->
             "Tex"
+
+toSizeEquation : SizeEquation  -> String
+toSizeEquation sizeEquat =
+    case sizeEquat of
+        SizeSmall ->
+            "0"
+        SizeMedium ->
+            "1"
+        SizeLarge ->
+            "2"
+
+
 
 
 fromOptionString : String -> MathType
@@ -157,6 +176,7 @@ type Msg
     | ToggleHelpPage Bool
     | UpdateErrorMessage String
     | UpdateMathEquation String
+    | UpdateSizeEquation SizeEquation
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -202,6 +222,8 @@ update msg model =
         UpdateMathEquation colorChanged ->
             ( { model | mathEquationColor = colorChanged }, Cmd.none )
 
+        UpdateSizeEquation sizeEquationUpdate ->
+            ( { model | sizeEquation = sizeEquationUpdate }, Cmd.none )
 
 
 {-
@@ -227,6 +249,12 @@ view model =
                     [ text ("") ]
                 , input [ id "selectColor", type_ "color", onInput UpdateMathEquation, value model.mathEquationColor, placeholder "select a color needs to be in #FFFFFF format" ] []
                 , img [ id "iconColorPalett", src iconColorPalette, classList [ ( "iconInButton", True ) ] ] []
+                ]
+            , div [ id "sizeSelectContainer" ]
+                [
+                      button [onClick (UpdateSizeEquation SizeSmall), classList [ ( "iconSizeButton", True ), ( "iconSizeButtonSelected", model.sizeEquation == SizeSmall ) ]] [ text "Small" ]
+                    , button [onClick (UpdateSizeEquation SizeMedium), classList [ ( "iconSizeButton", True ), ( "iconSizeButtonSelected", model.sizeEquation == SizeMedium ) ]] [ text "Medium" ]
+                    , button [onClick (UpdateSizeEquation SizeLarge), classList [ ( "iconSizeButton", True ), ( "iconSizeButtonSelected", model.sizeEquation == SizeLarge ) ]] [ text "Large" ]
                 ]
             , textarea [ id "textAreaMathEquation", onInput UpdateEquaion, value model.mathEquation, placeholder "Equation code placeholder" ] []
             , div []
