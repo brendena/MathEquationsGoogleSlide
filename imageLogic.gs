@@ -1,33 +1,53 @@
 function setImage(jsonImageData){
   var imageSlide = undefined;
-  var imageProperties = getSpecificSavedProperties("imageProperties");
+  
+  //var imageProperties = getSpecificSavedProperties("imageProperties");
+  
   var image = createImageFromBlob(jsonImageData["image"]);
   var slide = SlidesApp.getActivePresentation().getSelection().getCurrentPage();
+  
+  // if the equation was not linked
   if(jsonImageData["linkedMathEquation"] != ""){
     var imageObjectId = jsonImageData["linkedMathEquation"];
     if( imageObjectId == undefined)
       throw "image does not exist";
     else{
-      imageObject = imageProperties[imageObjectId]
-      if(imageObject == undefined)
-        throw "image is not part of this extension"
-        
       imageSlide = findImageSlide(imageObjectId)
       imageSlide.replace(image)
     }
-  }
+  }  // if the equation was linked
   else{
     Logger.log("New Image")
     imageSlide = slide.insertImage(image);
+    //Logger.log(imageSlide)
   }
+  //set image
+  //imageSlide.setWidth(100);
+  //imageSlide.setHeight(100);
+  return imageSlide.getObjectId();
+  
+}
 
-  
-  imageProperties[imageSlide.getObjectId()] = {
-    "equation": jsonImageData["mathEquation"],
-    "equationColor": jsonImageData["mathEquationColor"]
+function addAltText(jsonImageData, objectId) 
+{
+  var image = findImageSlide(objectId);
+  var requests = [{
+    updatePageElementAltText: 
+    {
+      objectId: image.getObjectId(),
+      title: createAltTitle(jsonImageData),
+      description: jsonImageData["mathEquation"],
+    }
+    
+  }];
+  try {
+    var batchUpdateResponse = Slides.Presentations.batchUpdate({
+      requests: requests
+    },SlidesApp.getActivePresentation().getId());
+    setImage = true;
+  } catch (e) {
+    throw ("BatchUpdateError -  " + e);
   }
-  
-  savePropertie("imageProperties", imageProperties)
 }
 
 function createImageFromBlob(blob){
@@ -63,60 +83,51 @@ function getLinkedToImage(){
     throw "please select a item"
   else if(pageElements.length >= 2)
     throw "can only select one item"
+    
+    
   var image = pageElements[0].asImage()
-  var imageObjectFromImageProperties = imageProperties[image.getObjectId()]
-  if(imageObjectFromImageProperties == undefined)
-    throw "not a equation"
-  var color = "#000000"
+  var imageProperties;
+  {
+    //old way of loading image
+    imageProperties = imageProperties[image.getObjectId()]
+    if(imageProperties == undefined)
+    {
+      var altTextTitle = image.getTitle();
+      imageProperties = getAltTextData(altTextTitle);
+      imageProperties["equation"] = image.getDescription();
+    }
+  }
 
-  if (imageObjectFromImageProperties["equationColor"] != undefined &&
-      imageObjectFromImageProperties["equationColor"] != null){
-    color = imageObjectFromImageProperties["equationColor"];
+
+  if (imageProperties["equationColor"] != undefined &&
+      imageProperties["equationColor"] != null){
+    imageProperties["equationColor"] = "#000000";
   }
 
   return {
       "objectId": image.getObjectId(),
-      "equation": imageObjectFromImageProperties["equation"],
-      "equationColor": color
+      "equation":  imageProperties["equation"],
+      "equationColor": imageProperties["equationColor"]
   }
 }
 
-
-function deleteDeletedEquations(){
-  var listSlides = SlidesApp.getActivePresentation().getSlides();
-  var savedImagesDict = getSpecificSavedProperties("imageProperties");
-  var savedImagesKeys = [];
-  for (var key in savedImagesDict) {
-    if (savedImagesDict.hasOwnProperty(key)) {
-      savedImagesKeys.push(key);
-    }
-  }
-  ///*
-  listSlides.forEach(function(slide){
-    var listImages = slide.getImages()
-    listImages.forEach(function(image){
-      savedImagesKeys = savedImagesKeys.filter(function(savedImageKey){
-        return savedImageKey != image.getObjectId()
-      });
-    });
-    
-  });
-  
-  // Know savedImages equals all the keys that dont' have
-  // a image in the presenttion
-  // know go through and delete all the keys inside of savedImagesKeys
-  Logger.log(savedImagesKeys)
-  savedImagesKeys.forEach(function(key){
-    if (savedImagesDict.hasOwnProperty(key)) {
-      delete savedImagesDict[key];
-    }
-  });
-  //*/
-  Logger.log(savedImagesDict)
-  savePropertie("imageProperties", savedImagesDict)
-  //savePropertie("imageProperties", {})
-}
 
 function test(){
   Logger.log(getSpecificSavedProperties("imageProperties"))
+}
+
+function createAltTitle(jsonImageData){
+  return "MathEquation,"+ jsonImageData["mathEquationColor"];
+}
+
+function getAltTextData(altTextTitle){
+  if(altTextTitle.search("MathEquation") == -1){
+    throw "Alt Text data doesn't match";
+  }
+  var splitData = altTextTitle.split(",");
+  
+  return {
+    "mathEquationColor": splitData[1]
+  }
+  
 }

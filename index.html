@@ -188,8 +188,8 @@ Then i'll have to reupload the images to google slides
     
      -->
     
-    <script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js" async>
+    <script type="text/javascript" 
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js" async >
     </script>
     <script type="text/x-mathjax-config">
         // needs to be in heer or else it doesn't work 
@@ -297,12 +297,19 @@ Then i'll have to reupload the images to google slides
                     var image = canvas.toDataURL("image/png");
                     jsonElmRequest["image"] = image.split("base64,")[1]
                     console.log(jsonElmRequest);
-                    google.script.run.withSuccessHandler(success).withFailureHandler(error).setImage(jsonElmRequest);
+                    //create image and add them to the slideshow
+                    google.script.run.withSuccessHandler(
+                      function(ObjectId){
+                        //once the image is added to the slideshow add alt text
+                        google.script.run.withSuccessHandler(success).withFailureHandler(error).addAltText(jsonElmRequest, ObjectId);
+                      }
+                    ).withFailureHandler(error).setImage(jsonElmRequest);
                 });    
             }
         });
         app.ports.reloadEquaion.subscribe(function(str){
            google.script.run.withSuccessHandler(function(results){
+               
                console.log(results);
                app.ports.updatingLinkedMathEquation.send(results.objectId)
                app.ports.updatingMathEquation.send(results.equation)
