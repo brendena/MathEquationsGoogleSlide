@@ -19,29 +19,27 @@ function setImage(jsonImageData){
   else{
     Logger.log("New Image")
     imageSlide = slide.insertImage(image);
-    //Logger.log(imageSlide)
+    
+    //set Image size
+    var sizeEquationType = jsonImageData["mathEquationSize"];
+    var sizeEquationHeight = 0;
+    
+    if(sizeEquationType == 0){
+      sizeEquationHeight = 50;
+    }
+    else if(sizeEquationType == 1){
+      sizeEquationHeight = 100;
+    }
+    else {
+       sizeEquationHeight = 150;
+    }
+    Logger.log("testing");
+    Logger.log(sizeEquationHeight);
+    
+    imageSlide.setWidth(sizeEquationHeight * jsonImageData["ratio"] );
+    imageSlide.setHeight(sizeEquationHeight );
   }
-  //set image
-  var sizeEquationType = jsonImageData["mathEquationSize"];
-  var sizeEquationWidth = 0;
-  if(sizeEquationType == 0){
-    sizeEquationWidth = 100;
-  }
-  else if(sizeEquationType == 1){
-    sizeEquationWidth = 200;
-  }
-  else {
-     sizeEquationWidth = 400;
-  }
-  Logger.log("testing");
-  Logger.log(sizeEquationWidth);
-  
-  imageSlide.setWidth(sizeEquationWidth);
-  imageSlide.setHeight(sizeEquationWidth * jsonImageData["ratio"] );
-  
-  //imageSlide.setHeight(100)
-  //imageSlide.setWidth(200)
-  
+
   return imageSlide.getObjectId();
   
 }

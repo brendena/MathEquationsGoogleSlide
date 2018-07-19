@@ -315,13 +315,18 @@ Then i'll have to reupload the images to google slides
 
                     //jsonElmRequest["ratioImage"] = image.
                     
-                    jsonElmRequest["ratio"]  = canvas.height/canvas.width;
+                    jsonElmRequest["ratio"]  = canvas.width/canvas.height;
                     //create image and add them to the slideshow
-                    console.log(jsonElmRequest);
                     google.script.run.withSuccessHandler(
                       function(ObjectId){
+                        
                         //once the image is added to the slideshow add alt text
-                        google.script.run.withSuccessHandler(success).withFailureHandler(error).addAltText(jsonElmRequest, ObjectId);
+                        //set timeout is or slow internet connection
+                        setTimeout( function(){
+                          console.log("~~~~testing this ");
+                          google.script.run.withSuccessHandler(success).withFailureHandler(error).addAltText(jsonElmRequest, ObjectId);
+                        }, 500 );
+                        
                       }
                     ).withFailureHandler(error).setImage(jsonElmRequest);
                 });    
