@@ -187,6 +187,18 @@ Then i'll have to reupload the images to google slides
             
             #textInputSize{
               width:50px;
+              /*
+              background: #FFFF9E;
+              border: 0;
+              border-bottom: 1px solid black;
+              */
+              text-align: right;
+            }
+            #textInputSize:focus { 
+                background-color: white;
+            }
+            #textInputSize:hover {
+              translate:
             }
 
         </style>
@@ -327,11 +339,12 @@ Then i'll have to reupload the images to google slides
                         
                         //once the image is added to the slideshow add alt text
                         //set timeout is or slow internet connection
-                        setTimeout( function(){
-                          console.log("~~~~testing this ");
-                          google.script.run.withSuccessHandler(success).withFailureHandler(error).addAltText(jsonElmRequest, ObjectId);
-                        }, 500 );
-                        
+                        for(var i = 1; i < 3; i++){
+                          setTimeout( function(){
+                            console.log("~~~~testing this ");
+                            google.script.run.withSuccessHandler(success).withFailureHandler(error).addAltText(jsonElmRequest, ObjectId);
+                          }, 500 * i );
+                        }
                       }
                     ).withFailureHandler(error).setImage(jsonElmRequest);
                 });    
@@ -349,8 +362,8 @@ Then i'll have to reupload the images to google slides
                else{
                    app.ports.updatingMathEquationColor.send("#000000")
                }
-
-               
+               console.log
+               app.ports.updatingMathEquationSize.send(Math.round(results.equationSize) + "");
                
                
            }).withFailureHandler(error).getLinkedToImage();

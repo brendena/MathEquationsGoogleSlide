@@ -34,6 +34,7 @@ function setImage(jsonImageData){
 function addAltText(jsonImageData, objectId) 
 {
   var image = findImageSlide(objectId);
+
   var requests = [{
     updatePageElementAltText: 
     {
@@ -89,6 +90,8 @@ function getLinkedToImage(){
     
     
   var image = pageElements[0].asImage()
+  
+  
   var imageProperties;
   {
     //old way of loading image
