@@ -57,7 +57,7 @@ main =
 
 init : ( Model, Cmd Msg )
 init =
-    ( Model Tex "" "" "" "#000000" False SizeMedium
+    ( Model Tex "" "" "" "#000000" False equationSizeMedium
     , Cmd.none
     )
 
@@ -73,7 +73,7 @@ type alias Model =
     , errorMessage : String
     , mathEquationColor : String
     , helpPageOpen : Bool
-    , sizeEquation : SizeEquation
+    , sizeEquation : Int
     }
 
 
@@ -82,10 +82,12 @@ type MathType
     | AsciiMath
     | Tex
 
-type SizeEquation
-    = SizeSmall
-    | SizeMedium
-    | SizeLarge
+
+equationSizeSmall = 12
+
+equationSizeMedium = 25
+
+equationSizeLarge = 50
 
 
 encodeModel : Model -> Value
@@ -95,7 +97,7 @@ encodeModel model =
         , ( "linkedMathEquation", Json.Encode.string model.linkedMathEquation )
         , ( "mathEquation", Json.Encode.string model.mathEquation )
         , ( "mathEquationColor", Json.Encode.string model.mathEquationColor )
-        , ( "mathEquationSize", Json.Encode.string (toSizeEquation model.sizeEquation ) ) 
+        , ( "mathEquationSize", Json.Encode.string (toString model.sizeEquation ) ) 
         ]
 
 
@@ -126,16 +128,6 @@ toOptionString currency =
 
         Tex ->
             "Tex"
-
-toSizeEquation : SizeEquation  -> String
-toSizeEquation sizeEquat =
-    case sizeEquat of
-        SizeSmall ->
-            "0"
-        SizeMedium ->
-            "1"
-        SizeLarge ->
-            "2"
 
 
 
@@ -176,7 +168,8 @@ type Msg
     | ToggleHelpPage Bool
     | UpdateErrorMessage String
     | UpdateMathEquation String
-    | UpdateSizeEquation SizeEquation
+    | UpdateSizeEquation Int
+    | UpdateInputSizeEquation String
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -224,8 +217,19 @@ update msg model =
 
         UpdateSizeEquation sizeEquationUpdate ->
             ( { model | sizeEquation = sizeEquationUpdate }, Cmd.none )
+        
+        UpdateInputSizeEquation sizeStringEquation ->
+            let 
+                sizeInt = Result.withDefault 1 (String.toInt sizeStringEquation)
 
-
+                removeBadNum : Int -> Int
+                removeBadNum sizeIntTmp =
+                    if (sizeInt < 1) then
+                        1
+                    else
+                        sizeIntTmp
+            in
+                ( { model | sizeEquation = (removeBadNum sizeInt) }, Cmd.none )
 {-
 
 -}
@@ -252,9 +256,10 @@ view model =
                 ]
             , div [ id "sizeSelectContainer" ]
                 [
-                      button [onClick (UpdateSizeEquation SizeSmall), classList [ ( "iconSizeButton", True ), ( "iconSizeButtonSelected", model.sizeEquation == SizeSmall ) ]] [ text "Small" ]
-                    , button [onClick (UpdateSizeEquation SizeMedium), classList [ ( "iconSizeButton", True ), ( "iconSizeButtonSelected", model.sizeEquation == SizeMedium ) ]] [ text "Medium" ]
-                    , button [onClick (UpdateSizeEquation SizeLarge), classList [ ( "iconSizeButton", True ), ( "iconSizeButtonSelected", model.sizeEquation == SizeLarge ) ]] [ text "Large" ]
+                      button [onClick (UpdateSizeEquation equationSizeSmall), classList [ ( "iconSizeButton", True ), ( "iconSizeButtonSelected", model.sizeEquation == equationSizeSmall ) ]] [ text "Small" ]
+                    , button [onClick (UpdateSizeEquation equationSizeMedium), classList [ ( "iconSizeButton", True ), ( "iconSizeButtonSelected", model.sizeEquation == equationSizeMedium ) ]] [ text "Medium" ]
+                    , button [onClick (UpdateSizeEquation equationSizeLarge), classList [ ( "iconSizeButton", True ), ( "iconSizeButtonSelected", model.sizeEquation == equationSizeLarge ) ]] [ text "Large" ]
+                    , input [ id "textInputSize", onInput UpdateInputSizeEquation, type_ "number", value <| toString model.sizeEquation] [ ]
                 ]
             , textarea [ id "textAreaMathEquation", onInput UpdateEquaion, value model.mathEquation, placeholder "Equation code placeholder" ] []
             , div []
