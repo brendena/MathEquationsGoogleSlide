@@ -9,36 +9,23 @@ function setImage(jsonImageData){
   // if the equation was not linked
   if(jsonImageData["linkedMathEquation"] != ""){
     var imageObjectId = jsonImageData["linkedMathEquation"];
-    if( imageObjectId == undefined)
-      throw "image does not exist";
-    else{
-      imageSlide = findImageSlide(imageObjectId)
-      imageSlide.replace(image)
-    }
+
+    imageSlide = findImageSlide(imageObjectId)
+    imageSlide.replace(image)
   }  // if the equation was linked
   else{
     Logger.log("New Image")
     imageSlide = slide.insertImage(image);
     
-    //set Image size
-    var sizeEquationType = jsonImageData["mathEquationSize"];
-    var sizeEquationHeight = 0;
-    
-    if(sizeEquationType == 0){
-      sizeEquationHeight = 50;
-    }
-    else if(sizeEquationType == 1){
-      sizeEquationHeight = 100;
-    }
-    else {
-       sizeEquationHeight = 150;
-    }
-    Logger.log("testing");
-    Logger.log(sizeEquationHeight);
-    
-    imageSlide.setWidth(sizeEquationHeight * jsonImageData["ratio"] );
-    imageSlide.setHeight(sizeEquationHeight );
+
+
   }
+  
+  //set Image size
+  var sizeEquationHeight = jsonImageData["mathEquationSize"];
+
+  imageSlide.setWidth(sizeEquationHeight * jsonImageData["ratio"] );
+  imageSlide.setHeight(sizeEquationHeight );
 
   return imageSlide.getObjectId();
   
@@ -108,22 +95,22 @@ function getLinkedToImage(){
     imageProperties = imageProperties[image.getObjectId()]
     if(imageProperties == undefined)
     {
+      
       var altTextTitle = image.getTitle();
       imageProperties = getAltTextData(altTextTitle);
       imageProperties["equation"] = image.getDescription();
     }
   }
 
-
-  if (imageProperties["equationColor"] != undefined &&
-      imageProperties["equationColor"] != null){
+  if (imageProperties["equationColor"] == undefined &&
+      imageProperties["equationColor"] == null){
     imageProperties["equationColor"] = "#000000";
   }
-
   return {
       "objectId": image.getObjectId(),
       "equation":  imageProperties["equation"],
-      "equationColor": imageProperties["equationColor"]
+      "equationColor": imageProperties["equationColor"],
+      "equationSize": image.getHeight()
   }
 }
 
@@ -143,7 +130,7 @@ function getAltTextData(altTextTitle){
   var splitData = altTextTitle.split(",");
   
   return {
-    "mathEquationColor": splitData[1]
+    "equationColor": splitData[1]
   }
   
 }
