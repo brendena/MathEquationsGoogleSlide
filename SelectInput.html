@@ -8373,20 +8373,9 @@ var _user$project$Main$viewOption = function (mathType) {
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Main$toSizeEquation = function (sizeEquat) {
-	var _p0 = sizeEquat;
-	switch (_p0.ctor) {
-		case 'SizeSmall':
-			return '0';
-		case 'SizeMedium':
-			return '1';
-		default:
-			return '2';
-	}
-};
 var _user$project$Main$toOptionString = function (currency) {
-	var _p1 = currency;
-	switch (_p1.ctor) {
+	var _p0 = currency;
+	switch (_p0.ctor) {
 		case 'MathML':
 			return 'MathML';
 		case 'AsciiMath':
@@ -8432,7 +8421,7 @@ var _user$project$Main$encodeModel = function (model) {
 								ctor: '_Tuple2',
 								_0: 'mathEquationSize',
 								_1: _elm_lang$core$Json_Encode$string(
-									_user$project$Main$toSizeEquation(model.sizeEquation))
+									_elm_lang$core$Basics$toString(model.sizeEquation))
 							},
 							_1: {ctor: '[]'}
 						}
@@ -8441,6 +8430,9 @@ var _user$project$Main$encodeModel = function (model) {
 			}
 		});
 };
+var _user$project$Main$equationSizeLarge = 50;
+var _user$project$Main$equationSizeMedium = 25;
+var _user$project$Main$equationSizeSmall = 12;
 var _user$project$Main$reloadEquaion = _elm_lang$core$Native_Platform.outgoingPort(
 	'reloadEquaion',
 	function (v) {
@@ -8465,6 +8457,11 @@ var _user$project$Main$Model = F7(
 		return {mathType: a, linkedMathEquation: b, mathEquation: c, errorMessage: d, mathEquationColor: e, helpPageOpen: f, sizeEquation: g};
 	});
 var _user$project$Main$Tex = {ctor: 'Tex'};
+var _user$project$Main$init = {
+	ctor: '_Tuple2',
+	_0: A7(_user$project$Main$Model, _user$project$Main$Tex, '', '', '', '#000000', false, _user$project$Main$equationSizeMedium),
+	_1: _elm_lang$core$Platform_Cmd$none
+};
 var _user$project$Main$AsciiMath = {ctor: 'AsciiMath'};
 var _user$project$Main$MathML = {ctor: 'MathML'};
 var _user$project$Main$valuesWithLabels = {
@@ -8481,8 +8478,8 @@ var _user$project$Main$valuesWithLabels = {
 	}
 };
 var _user$project$Main$fromOptionString = function (string) {
-	var _p2 = string;
-	switch (_p2) {
+	var _p1 = string;
+	switch (_p1) {
 		case 'MathML':
 			return _user$project$Main$MathML;
 		case 'AsciiMath':
@@ -8495,13 +8492,13 @@ var _user$project$Main$fromOptionString = function (string) {
 };
 var _user$project$Main$update = F2(
 	function (msg, model) {
-		var _p3 = msg;
-		switch (_p3.ctor) {
+		var _p2 = msg;
+		switch (_p2.ctor) {
 			case 'MathTypeChange':
 				var newModel = _elm_lang$core$Native_Utils.update(
 					model,
 					{
-						mathType: _user$project$Main$fromOptionString(_p3._0)
+						mathType: _user$project$Main$fromOptionString(_p2._0)
 					});
 				return {
 					ctor: '_Tuple2',
@@ -8531,7 +8528,7 @@ var _user$project$Main$update = F2(
 			case 'UpdateEquaion':
 				var newModel = _elm_lang$core$Native_Utils.update(
 					model,
-					{mathEquation: _p3._0});
+					{mathEquation: _p2._0});
 				return {
 					ctor: '_Tuple2',
 					_0: newModel,
@@ -8546,7 +8543,7 @@ var _user$project$Main$update = F2(
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{linkedMathEquation: _p3._0}),
+						{linkedMathEquation: _p2._0}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			case 'ToggleHelpPage':
@@ -8554,7 +8551,7 @@ var _user$project$Main$update = F2(
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{helpPageOpen: _p3._0}),
+						{helpPageOpen: _p2._0}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			case 'UpdateErrorMessage':
@@ -8562,7 +8559,7 @@ var _user$project$Main$update = F2(
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{errorMessage: _p3._0}),
+						{errorMessage: _p2._0}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			case 'UpdateMathEquation':
@@ -8570,27 +8567,39 @@ var _user$project$Main$update = F2(
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{mathEquationColor: _p3._0}),
+						{mathEquationColor: _p2._0}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
-			default:
+			case 'UpdateSizeEquation':
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{sizeEquation: _p3._0}),
+						{sizeEquation: _p2._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			default:
+				var sizeInt = A2(
+					_elm_lang$core$Result$withDefault,
+					1,
+					_elm_lang$core$String$toInt(_p2._0));
+				var removeBadNum = function (sizeIntTmp) {
+					return (_elm_lang$core$Native_Utils.cmp(sizeInt, 1) < 0) ? 1 : sizeIntTmp;
+				};
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							sizeEquation: removeBadNum(sizeInt)
+						}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 		}
 	});
-var _user$project$Main$SizeLarge = {ctor: 'SizeLarge'};
-var _user$project$Main$SizeMedium = {ctor: 'SizeMedium'};
-var _user$project$Main$init = {
-	ctor: '_Tuple2',
-	_0: A7(_user$project$Main$Model, _user$project$Main$Tex, '', '', '', '#000000', false, _user$project$Main$SizeMedium),
-	_1: _elm_lang$core$Platform_Cmd$none
+var _user$project$Main$UpdateInputSizeEquation = function (a) {
+	return {ctor: 'UpdateInputSizeEquation', _0: a};
 };
-var _user$project$Main$SizeSmall = {ctor: 'SizeSmall'};
 var _user$project$Main$UpdateSizeEquation = function (a) {
 	return {ctor: 'UpdateSizeEquation', _0: a};
 };
@@ -9206,7 +9215,7 @@ var _user$project$Main$view = function (model) {
 											{
 												ctor: '::',
 												_0: _elm_lang$html$Html_Events$onClick(
-													_user$project$Main$UpdateSizeEquation(_user$project$Main$SizeSmall)),
+													_user$project$Main$UpdateSizeEquation(_user$project$Main$equationSizeSmall)),
 												_1: {
 													ctor: '::',
 													_0: _elm_lang$html$Html_Attributes$classList(
@@ -9218,7 +9227,7 @@ var _user$project$Main$view = function (model) {
 																_0: {
 																	ctor: '_Tuple2',
 																	_0: 'iconSizeButtonSelected',
-																	_1: _elm_lang$core$Native_Utils.eq(model.sizeEquation, _user$project$Main$SizeSmall)
+																	_1: _elm_lang$core$Native_Utils.eq(model.sizeEquation, _user$project$Main$equationSizeSmall)
 																},
 																_1: {ctor: '[]'}
 															}
@@ -9238,7 +9247,7 @@ var _user$project$Main$view = function (model) {
 												{
 													ctor: '::',
 													_0: _elm_lang$html$Html_Events$onClick(
-														_user$project$Main$UpdateSizeEquation(_user$project$Main$SizeMedium)),
+														_user$project$Main$UpdateSizeEquation(_user$project$Main$equationSizeMedium)),
 													_1: {
 														ctor: '::',
 														_0: _elm_lang$html$Html_Attributes$classList(
@@ -9250,7 +9259,7 @@ var _user$project$Main$view = function (model) {
 																	_0: {
 																		ctor: '_Tuple2',
 																		_0: 'iconSizeButtonSelected',
-																		_1: _elm_lang$core$Native_Utils.eq(model.sizeEquation, _user$project$Main$SizeMedium)
+																		_1: _elm_lang$core$Native_Utils.eq(model.sizeEquation, _user$project$Main$equationSizeMedium)
 																	},
 																	_1: {ctor: '[]'}
 																}
@@ -9270,7 +9279,7 @@ var _user$project$Main$view = function (model) {
 													{
 														ctor: '::',
 														_0: _elm_lang$html$Html_Events$onClick(
-															_user$project$Main$UpdateSizeEquation(_user$project$Main$SizeLarge)),
+															_user$project$Main$UpdateSizeEquation(_user$project$Main$equationSizeLarge)),
 														_1: {
 															ctor: '::',
 															_0: _elm_lang$html$Html_Attributes$classList(
@@ -9282,7 +9291,7 @@ var _user$project$Main$view = function (model) {
 																		_0: {
 																			ctor: '_Tuple2',
 																			_0: 'iconSizeButtonSelected',
-																			_1: _elm_lang$core$Native_Utils.eq(model.sizeEquation, _user$project$Main$SizeLarge)
+																			_1: _elm_lang$core$Native_Utils.eq(model.sizeEquation, _user$project$Main$equationSizeLarge)
 																		},
 																		_1: {ctor: '[]'}
 																	}
@@ -9295,7 +9304,31 @@ var _user$project$Main$view = function (model) {
 														_0: _elm_lang$html$Html$text('Large'),
 														_1: {ctor: '[]'}
 													}),
-												_1: {ctor: '[]'}
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$input,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$id('textInputSize'),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$UpdateInputSizeEquation),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$type_('number'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$value(
+																			_elm_lang$core$Basics$toString(model.sizeEquation)),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														},
+														{ctor: '[]'}),
+													_1: {ctor: '[]'}
+												}
 											}
 										}
 									}),
