@@ -40,6 +40,9 @@ port updatingLinkedMathEquation : (String -> msg) -> Sub msg
 port updatingMathEquationColor : (String -> msg) -> Sub msg
 
 
+port updatingMathEquationSize : (String -> msg) -> Sub msg
+
+
 port updatingMathEquation : (String -> msg) -> Sub msg
 
 
@@ -83,11 +86,11 @@ type MathType
     | Tex
 
 
-equationSizeSmall = 12
+equationSizeSmall = 50
 
-equationSizeMedium = 25
+equationSizeMedium = 100
 
-equationSizeLarge = 50
+equationSizeLarge = 150
 
 
 encodeModel : Model -> Value
@@ -399,6 +402,7 @@ subscriptions model =
         , updatingMathEquation UpdateEquaion
         , updateErrorMessage UpdateErrorMessage
         , updatingMathEquationColor UpdateMathEquation
+        , updatingMathEquationSize UpdateInputSizeEquation
         ]
 
 

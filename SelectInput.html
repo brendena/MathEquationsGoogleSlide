@@ -8430,9 +8430,9 @@ var _user$project$Main$encodeModel = function (model) {
 			}
 		});
 };
-var _user$project$Main$equationSizeLarge = 50;
-var _user$project$Main$equationSizeMedium = 25;
-var _user$project$Main$equationSizeSmall = 12;
+var _user$project$Main$equationSizeLarge = 150;
+var _user$project$Main$equationSizeMedium = 100;
+var _user$project$Main$equationSizeSmall = 50;
 var _user$project$Main$reloadEquaion = _elm_lang$core$Native_Platform.outgoingPort(
 	'reloadEquaion',
 	function (v) {
@@ -8450,6 +8450,7 @@ var _user$project$Main$sumitEquation = _elm_lang$core$Native_Platform.outgoingPo
 	});
 var _user$project$Main$updatingLinkedMathEquation = _elm_lang$core$Native_Platform.incomingPort('updatingLinkedMathEquation', _elm_lang$core$Json_Decode$string);
 var _user$project$Main$updatingMathEquationColor = _elm_lang$core$Native_Platform.incomingPort('updatingMathEquationColor', _elm_lang$core$Json_Decode$string);
+var _user$project$Main$updatingMathEquationSize = _elm_lang$core$Native_Platform.incomingPort('updatingMathEquationSize', _elm_lang$core$Json_Decode$string);
 var _user$project$Main$updatingMathEquation = _elm_lang$core$Native_Platform.incomingPort('updatingMathEquation', _elm_lang$core$Json_Decode$string);
 var _user$project$Main$updateErrorMessage = _elm_lang$core$Native_Platform.incomingPort('updateErrorMessage', _elm_lang$core$Json_Decode$string);
 var _user$project$Main$Model = F7(
@@ -9070,7 +9071,11 @@ var _user$project$Main$subscriptions = function (model) {
 					_1: {
 						ctor: '::',
 						_0: _user$project$Main$updatingMathEquationColor(_user$project$Main$UpdateMathEquation),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _user$project$Main$updatingMathEquationSize(_user$project$Main$UpdateInputSizeEquation),
+							_1: {ctor: '[]'}
+						}
 					}
 				}
 			}
