@@ -204,7 +204,7 @@ Then i'll have to reupload the images to google slides
     </head>
     <body>
     <div id="main"></div>
-    <canvas id="myCanvas" width="800px" style="display:none">
+    <canvas id="myCanvas" width="800" style="display:none" >
     
         
         
@@ -295,6 +295,8 @@ Then i'll have to reupload the images to google slides
               var divEquation = document.getElementById(divIdEquation)
               var math = MathJax.Hub.getAllJax(divIdEquation)[0];
               divEquation.style.width = "1000px";
+              
+              
               // page on live reloading
               // https://docs.mathjax.org/en/v1.0/typeset.html 
               if("MathML" == equationJson["mathType"]){
@@ -321,6 +323,7 @@ Then i'll have to reupload the images to google slides
             jsonElmRequest = JSON.parse(str)
             var divSvg = document.getElementById(jsonElmRequest["mathType"] + "Equation");
             if(divSvg != null && jsonElmRequest["mathEquation"] != ""){
+            
                 var svg = divSvg.getElementsByTagName("svg")[0];
                 var svgClone = svg.cloneNode(true);
                 svgClone.style.color = jsonElmRequest["mathEquationColor"]
@@ -329,7 +332,7 @@ Then i'll have to reupload the images to google slides
                 drawInlineSVG(svgClone, function(){
                     var image = canvas.toDataURL("image/png");
                     jsonElmRequest["image"] = image.split("base64,")[1];
-
+                    
                     //jsonElmRequest["ratioImage"] = image.
                     
                     jsonElmRequest["ratio"]  = canvas.width/canvas.height;
@@ -345,7 +348,7 @@ Then i'll have to reupload the images to google slides
                           console.log(amountOfAttemts);
                           if(amountOfAttemts < 10){
                             setTimeout( function(){
-                              console.log("~~~~testing this ");
+                            
                               google.script.run.withSuccessHandler(success).withFailureHandler(sendAltText).addAltText(jsonElmRequest, ObjectId);
                             }, 100 * amountOfAttemts);
                           }
@@ -358,6 +361,7 @@ Then i'll have to reupload the images to google slides
                 });    
             }
         });
+        
         app.ports.reloadEquaion.subscribe(function(str){
            google.script.run.withSuccessHandler(function(results){
                
@@ -391,19 +395,30 @@ Then i'll have to reupload the images to google slides
             the dimension of the svg
         */
         function drawInlineSVG(svgElement, callback){
+            
+            var listText = svgElement.getElementsByTagName("text");
+            for(var j = listText.length - 1; j >= 0 ; j--){
+            
+              listText[j].parentNode.removeChild(listText[j])
+            }
+        
             var svgURL = new XMLSerializer().serializeToString(svgElement);
             var canvas = document.getElementById("myCanvas");
-            console.log();
+            
             var ratioSvg = svgElement.height.baseVal.valueInSpecifiedUnits/svgElement.width.baseVal.valueInSpecifiedUnits;
             var heigthSvg =  canvas.width * ratioSvg
             
             canvas.height =  Math.round(heigthSvg)
+            
             var img  = new Image();
             img.onload = function(){                      //width // height
+              console.log("calling the callback");
               canvas.getContext('2d').drawImage(this, 0,0, canvas.width, canvas.height);
+              
               callback();
             }
-            img.src = 'data:image/svg+xml; charset=utf8, '+encodeURIComponent(svgURL);
+          
+            img.src = 'data:image/svg+xml; charset=utf8, '+  encodeURIComponent(svgURL); 
         }
 
     </script>
