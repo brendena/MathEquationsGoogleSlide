@@ -1,3 +1,10 @@
+# Project has been outdated
+
+This project needed to be rewritten, so i made a [new repo](https://github.com/brendena/MathEquationsGoogleSlideV2) with the redesized extension 
+
+* https://github.com/brendena/MathEquationsGoogleSlideV2
+# ______________________________
+
 ![Master Google sheets documents icon](https://github.com/brendena/MathEquationsGoogleSlide/blob/master/image/96x96.png?raw=true)
 
 # [MathEquationsGoogleSlide](https://chrome.google.com/webstore/detail/math-equations/edbiogkpgmbdkmgmdcdmgminoahbcdml)
