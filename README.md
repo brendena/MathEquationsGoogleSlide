@@ -1,4 +1,4 @@
-# Project has been outdated
+# Project is outdated
 
 This project needed to be rewritten, so i made a [new repo](https://github.com/brendena/MathEquationsGoogleSlideV2) with the redesized extension 
 
